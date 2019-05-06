@@ -1,0 +1,26 @@
+HKCR
+{
+	VsiVevo.Study.1 = s 'VsiStudy Class'
+	{
+		CLSID = s '{7E1F3F11-745C-44C3-87E3-6EED6B7E196E}'
+	}
+	VsiVevo.Study = s 'VsiStudy Class'
+	{
+		CLSID = s '{7E1F3F11-745C-44C3-87E3-6EED6B7E196E}'
+		CurVer = s 'VsiVevo.Study.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {7E1F3F11-745C-44C3-87E3-6EED6B7E196E} = s 'VsiStudy Class'
+		{
+			ProgID = s 'VsiVevo.Study.1'
+			VersionIndependentProgID = s 'VsiVevo.Study'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{624D2124-248F-449C-9AF2-3F5CC258C1D5}'
+		}
+	}
+}

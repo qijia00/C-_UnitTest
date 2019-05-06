@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{7e24a5ec-2431-41a9-87f6-e311b7946c1b}</UniqueIdentifier>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VsiChangeImageLabel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VsiDataListWnd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VsiDeleteConfirmation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VsiImage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\VsiImportExportXml.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VsiMoveSeries.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VsiSeries.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VsiSession.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VsiStudy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VsiStudyBrowser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VsiStudyInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VsiStudyManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VsiStudyModule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VsiStudyModule_i.c">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xdlldata.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VsiChangeMsmntPackageDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="VsiStudyModule.def">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="VsiChangeImageLabel.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VsiDataListWnd.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VsiImage.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VsiMoveSeries.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VsiSeries.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VsiSession.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VsiStudy.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VsiStudyBrowser.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VsiStudyInfo.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VsiStudyManager.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VsiStudyModule.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VsiStudyModule.idl">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="VsiStudyModule.manifest">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiChangeImageLabel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiDataListWnd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiDeleteConfirmation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiImage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\VsiImportExportXml.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiMoveSeries.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiSeries.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiSession.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiStudy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiStudyBrowser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiStudyInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiStudyManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\VsiStudyModule.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dllmain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xdlldata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiSearchWnd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiChangeMsmntPackageDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiChangeStudyInfoDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="VsiStudyModule.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

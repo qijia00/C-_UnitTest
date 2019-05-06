@@ -1,0 +1,1239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="Configuration.xsl"?>
+<configuration version="1.0">
+
+  <parameterTypes>
+    <parameterType name="boolean" progID="VsiVevo.ParameterBoolean"/>
+    <parameterType name="discrete" progID="VsiVevo.ParameterDiscrete"/>
+    <parameterType name="range" progID="VsiVevo.ParameterRange"/>
+    <parameterType name="bitfield" progID="VsiVevo.ParameterBitfield"/>
+  </parameterTypes>
+
+  <parameters subsys="System">
+    <parameter name="Operator" type="range">
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="string" default=""/>
+    </parameter>
+    <parameter name="Version-Software" type="range">
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="string"/>
+    </parameter>
+    <parameter name="Path-Settings" type="range">
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="string"/>
+    </parameter>
+    <parameter name="State" type="bitfield">
+      <flags>
+        <flag name="Global"/>
+      </flags>
+    </parameter>
+  </parameters>
+
+  <parameters subsys="General">
+    <parameter name="Operator-List-Update" type="boolean">
+      <flags>
+        <flag name="Event"/>
+      </flags>
+    </parameter>
+  </parameters>
+
+  <parameters subsys="Settings">
+    <parameter name="Version-Software" type="range">
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="string"/>
+    </parameter>
+    <parameter name="Version-Software-Current" type="range">
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="string"/>
+    </parameter>
+  </parameters>
+
+  <parameters subsys="HwSystemControl" version="1.0">
+    <parameter name="Time-Stamp-Clock" type="range">
+      <flags>
+        <flag name="Global"/>
+        <flag name="ReadOnly"/>
+      </flags>
+      <settings valueType="double" default="400000.0"/>
+      <display units="Hz"/>
+    </parameter>
+    <parameter name="RF-Saturation" type="range">
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="2147400000"/>
+    </parameter>
+  </parameters>
+
+  <parameters subsys="ColorSoft" version="1.0">
+    <parameter name="Remove-Lines-Proc" type="range">
+      <settings valueType="long" default="0"/>
+      <display units="lines"/>
+    </parameter>
+  </parameters>
+
+  <parameters subsys="PaModeSoft" version="1.0">
+
+    <parameter name="High-Line-Density" type="boolean">
+      <settings default="false"/>
+    </parameter>
+
+    <parameter name="Acquisition-Mode" type="discrete">
+      <notes>PA Acquisition Modes</notes>
+      <settings valueType="long" default="0">
+        <values>
+          <value value="0"/>
+          <value value="1"/>
+          <value value="2"/>
+          <value value="3"/>
+        </values>
+      </settings>
+      <display>
+        <labels>
+          <label name="Standard"/>
+          <label name="Oxy-Hemo"/>
+          <label name="NanoStepper"/>
+          <label name="Spectro"/>
+        </labels>
+      </display>
+    </parameter>
+
+  </parameters>
+
+  <parameters subsys="PwModeSoft" version="1.0">
+    <parameter name="Clutter-HP" type="range">
+      <settings valueType="double" min="0.0" max="200000.0" quantize="0.0001" default="0.0"/>
+      <display units="Hz"/>
+    </parameter>
+    <parameter name="Pw-Peak-Trace" type="discrete">
+      <settings valueType="long" default="1">
+        <values>
+          <value value="1"/>
+          <value value="2"/>
+          <value value="3"/>
+          <value value="4"/>
+          <value value="5"/>
+        </values>
+      </settings>
+      <display>
+        <labels>
+          <label name="none"/>
+          <label name=" + "/>
+          <label name=" - "/>
+          <label name="+/-"/>
+          <label name="auto"/>
+        </labels>
+      </display>
+    </parameter>
+    <parameter name="Pw-Mean-Trace" type="discrete">
+      <settings valueType="long" default="101">
+        <values>
+          <value value="101"/>
+          <value value="102"/>
+          <value value="103"/>
+          <value value="104"/>
+        </values>
+      </settings>
+      <display>
+        <labels>
+          <label name="none"/>
+          <label name=" + "/>
+          <label name=" - "/>
+          <label name="+/-"/>
+        </labels>
+      </display>
+    </parameter>
+    <!--This parameter replaces "Trace-Threshold" which is no longer valid-->
+    <parameter name="Vti-Trace-Threshold" type="discrete">
+      <settings valueType="double" default="6.0">
+        <values>
+          <value value="0.1"/>
+          <value value="0.2"/>
+          <value value="0.3"/>
+          <value value="0.4"/>
+          <value value="0.5"/>
+          <value value="0.6"/>
+          <value value="0.7"/>
+          <value value="0.8"/>
+          <value value="0.9"/>
+          <value value="1.0"/>
+          <value value="1.25"/>
+          <value value="1.5"/>
+          <value value="1.75"/>
+          <value value="2.0"/>
+          <value value="2.5"/>
+          <value value="3.0"/>
+          <value value="3.5"/>
+          <value value="4.0"/>
+          <value value="4.5"/>
+          <value value="5.0"/>
+          <value value="6.0"/>
+          <value value="7.0"/>
+          <value value="8.0"/>
+          <value value="9.0"/>
+          <value value="10.0"/>
+          <value value="12.5"/>
+          <value value="15.0"/>
+          <value value="17.5"/>
+          <value value="20.0"/>
+          <value value="25.0"/>
+          <value value="30.0"/>
+          <value value="40.0"/>
+          <value value="50.0"/>
+          <value value="75.0"/>
+          <value value="100.0"/>
+        </values>
+      </settings>
+      <display>
+        <labels>
+          <label name="0.1"/>
+          <label name="0.2"/>
+          <label name="0.3"/>
+          <label name="0.4"/>
+          <label name="0.5"/>
+          <label name="0.6"/>
+          <label name="0.7"/>
+          <label name="0.8"/>
+          <label name="0.9"/>
+          <label name="1.0"/>
+          <label name="1.25"/>
+          <label name="1.5"/>
+          <label name="1.75"/>
+          <label name="2.0"/>
+          <label name="2.5"/>
+          <label name="3.0"/>
+          <label name="3.5"/>
+          <label name="4.0"/>
+          <label name="4.5"/>
+          <label name="5.0"/>
+          <label name="6.0"/>
+          <label name="7.0"/>
+          <label name="8.0"/>
+          <label name="9.0"/>
+          <label name="10.0"/>
+          <label name="12.5"/>
+          <label name="15.0"/>
+          <label name="17.5"/>
+          <label name="20.0"/>
+          <label name="25.0"/>
+          <label name="30.0"/>
+          <label name="40.0"/>
+          <label name="50.0"/>
+          <label name="75.0"/>
+          <label name="100.0"/>
+        </labels>
+      </display>
+    </parameter>
+
+  </parameters>
+
+  <parameters subsys="Rx" version="1.0">
+    <parameter name="Gate-Size" type="range">
+      <settings valueType="long" min="1" default="1"/>
+    </parameter>
+  </parameters>
+
+  <parameters subsys="Hardware" version="1.0">
+    <parameter name="Physio-Clock-Set" type="range">
+      <flags>
+        <flag name="Global"/>
+        <flag name="ReadOnly"/>
+      </flags>
+      <settings valueType="long" default="8000"/>
+      <display units="Hz"/>
+    </parameter>
+    <parameter name="Physio-Clock" type="range">
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="8000.0"/>
+      <display units="Hz"/>
+    </parameter>
+  </parameters>
+
+  <parameters subsys="HwSystemControl" version="1.0">
+    <parameter name="Time-Stamp-Clock" type="range">
+      <flags>
+        <flag name="Global"/>
+        <flag name="ReadOnly"/>
+      </flags>
+      <settings valueType="double" default="400000.0"/>
+      <display units="Hz"/>
+    </parameter>
+  </parameters>
+
+  <parameters subsys="Physiological" version="1.0">
+
+    <parameter name="BP-Gain" type="discrete">
+      <notes>BP gain as linked to the HW gain</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="long" default="1">
+        <values>
+          <value value="0"/>
+          <value value="1"/>
+        </values>
+      </settings>
+      <display>
+        <labels>
+          <label name="x1"/>
+          <label name="x4"/>
+        </labels>
+      </display>
+    </parameter>
+
+    <parameter name="ECG-Gain" type="discrete">
+      <notes>ECG gain as linked to the HW gain</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="long" default="1">
+        <values>
+          <value value="0"/>
+          <value value="1"/>
+        </values>
+      </settings>
+      <display>
+        <labels>
+          <label name="x1"/>
+          <label name="x4"/>
+        </labels>
+      </display>
+    </parameter>
+
+    <parameter name="Physio-Baseline" type="range">
+      <notes>Where the baseline occurs in the image (0.5 is centered, 0 top, 1 bottom)</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="0.75"/>
+    </parameter>
+
+    <parameter name="Physio-Block-Size" type="range">
+      <notes>Number of samples in an acquisition block (fixed to match VsiProtocol.h VSI_PHYSIO_SAMPLE_SIZE_MAX)</notes>
+      <flags>
+        <flag name="Global"/>
+        <flag name="ReadOnly"/>
+      </flags>
+      <settings valueType="long" default="256"/>
+    </parameter>
+
+    <parameter name="Physio-Display" type="boolean">
+      <notes>Defines if the physiological window is shown</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings default="true"/>
+    </parameter>
+
+    <parameter name="Physio-Display-Filter" type="range">
+      <notes>Filter Frequency for display of physio</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="long" default="16"/>
+    </parameter>
+
+    <!-- ECG -->
+    <parameter name="ECG-Display-Markers" type="boolean">
+      <notes>Show ecg event markers</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings default="false"/>
+    </parameter>
+
+    <parameter name="ECG-Available" type="boolean">
+      <notes>Indicate if the ECG signal is available</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings default="true"/>
+    </parameter>
+
+    <parameter name="ECG-Color" type="range">
+      <notes>Display color for physiological stream</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="long" default="0x00C800"/>
+    </parameter>
+
+    <parameter name="ECG-Display-Image" type="boolean">
+      <notes>Defines whether this stream is displayed along with image</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings default="true"/>
+    </parameter>
+
+    <parameter name="ECG-Display-RT" type="boolean">
+      <notes>Defines whether this stream is displayed in real time on the status bar</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings default="true"/>
+    </parameter>
+
+    <parameter name="ECG-First-Max-Percent" type="range">
+      <notes>First max percent value</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="0.600"/>
+      <display units="%"/>
+    </parameter>
+
+    <parameter name="ECG-Blank-Time" type="range">
+      <notes>Blanking interval after a r-wave trigger point</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="0.06"/>
+      <display units="sec"/>
+    </parameter>
+
+    <parameter name="ECG-Default-Threshold" type="range">
+      <notes>Default detection level for ECG</notes>
+      <flags>
+        <flag name="Global"/>
+        <flag name="NoEvent"/>
+      </flags>
+      <settings valueType="long" default="5000"/>
+    </parameter>
+
+    <parameter name="ECG-Noise-Threshold" type="range">
+      <notes>Noise threshold for ecg detection</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="long" default="25"/>
+    </parameter>
+
+    <parameter name="ECG-Detect-Timeout-Period" type="range">
+      <notes>Time out period before we reset ECG detection buffer</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="0.5"/>
+      <display units="seconds"/>
+    </parameter>
+
+    <parameter name="ECG-Maxima-Block-Time" type="range">
+      <notes>Time of the block to search for r-wave maximua in</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="0.100"/>
+      <display units="sec"/>
+    </parameter>
+
+    <parameter name="ECG-Max-Search-Time" type="range">
+      <notes>ECG max search time</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="0.020"/>
+      <display units="sec"/>
+    </parameter>
+
+    <parameter name="ECG-Change-Factor" type="range">
+      <notes>How quickly do we allow change of the ECG detection threshold value</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="0.25"/>
+      <display units="%"/>
+    </parameter>
+
+    <parameter name="ECG-Change-Period" type="range">
+      <notes>How often do we allow change of the ECG detection threshold value</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="0.25"/>
+      <display units="sec"/>
+    </parameter>
+
+    <parameter name="ECG-Filter-Taps" type="range">
+      <notes>Number of taps in band pass filter</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="long" default="128"/>
+    </parameter>
+
+    <parameter name="ECG-Filter-High-Freq" type="range">
+      <notes>ECG bandpass filter high value</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="200.0"/>
+      <display units="Hz"/>
+    </parameter>
+
+    <parameter name="ECG-Filter-Low-Freq" type="range">
+      <notes>ECG bandpass filter low value</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="100.0"/>
+      <display units="Hz"/>
+    </parameter>
+
+    <parameter name="ECG-Avg-Cycles" type="range">
+      <notes>ECG cycles over which average is calculated</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="long" default="5"/>
+      <display units="cycles"/>
+    </parameter>
+
+    <parameter name="ECG-Avg-Cycles-Time" type="range">
+      <notes>ECG time over which average is calculated</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="1000"/>
+      <display units="ms"/>
+    </parameter>
+
+
+
+
+    <!-- Temperature -->
+    <parameter name="Temp-Available" type="boolean">
+      <notes>Indicate if the temperature signal is available</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings default="true"/>
+    </parameter>
+
+    <parameter name="Temp-Color" type="range">
+      <notes>Display color for physiological stream</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="long" default="0xB3B340"/>
+    </parameter>
+
+    <parameter name="Temp-Display-Image" type="boolean">
+      <notes>Defines whether this stream is displayed along with image</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings default="true"/>
+    </parameter>
+
+    <parameter name="Temp-Display-RT" type="boolean">
+      <notes>Defines whether this stream is displayed in real time on the status bar</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings default="true"/>
+    </parameter>
+
+    <parameter name="Temp-Avg-Period" type="range">
+      <notes>Temp time over which average is calculated</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="100.0"/>
+      <display units="ms"/>
+    </parameter>
+
+    <!-- Blood Pressure -->
+    <parameter name="BP-Available" type="boolean">
+      <notes>Indicate if the blood pressure signal is available</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings default="true"/>
+    </parameter>
+
+    <parameter name="BP-Color" type="range">
+      <notes>Display color for physiological stream</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="long" default="0x2800CC"/>
+    </parameter>
+
+    <parameter name="BP-Display-Image" type="boolean">
+      <notes>Defines whether this stream is displayed along with image</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings default="false"/>
+    </parameter>
+
+    <parameter name="BP-Display-RT" type="boolean">
+      <notes>Defines whether this stream is displayed in real time on the status bar</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings default="false"/>
+    </parameter>
+
+    <parameter name="BP-Time-Avr" type="range">
+      <notes>Blood pressure time over which average is calculated</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="1.0"/>
+      <display units="sec"/>
+    </parameter>
+
+    <parameter name="BP-Calibration-Level" type="range">
+      <notes>BP-Calibration.</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="long" min="0" max="500" default="100"/>
+    </parameter>
+
+    <parameter name="BP-Time-Out" type="range">
+      <notes>BP-Time-Out</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="-0.0155"/>
+    </parameter>
+
+    <parameter name="BP-Calibration-Level-Min" type="range">
+      <notes>the minimal Blood Pressure level the user can calibrate the pressure at</notes>
+      <notes>the value is in samples</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="100.0"/>
+    </parameter>
+
+    <parameter name="BP-Zero-Calibrated" type="boolean">
+      <notes>Bp Zero Calibration performed</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings default="false"/>
+    </parameter>
+
+    <parameter name="BP-Calibration-Packets" type="range">
+      <notes>Number of packets for Calibration</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="long" min="1" max="10" default="4"/>
+    </parameter>
+
+    <parameter name="BP-Avg-Period" type="range">
+      <notes>Blood pressure time over which average is calculated</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="10.0"/>
+      <display units="ms"/>
+    </parameter>
+
+    <parameter name="BP-Avg-Cycles" type="range">
+      <notes>Blood pressure cycles over which average is calculated</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="long" default="5"/>
+      <display units="cycles"/>
+    </parameter>
+
+    <parameter name="BP-Avg-Cycles-Time" type="range">
+      <notes>Blood pressure time over which average is calculated</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="1000"/>
+      <display units="ms"/>
+    </parameter>
+
+    <parameter name="BP-Markers-Display" type="boolean">
+      <notes>Show blood pressure markers</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings default="false"/>
+    </parameter>
+
+
+    <!-- Respiration -->
+    <parameter name="Resp-Available" type="boolean">
+      <notes>Indicate if the respiration signal is available</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings default="true"/>
+    </parameter>
+
+    <parameter name="Resp-Color" type="range">
+      <notes>Display color for physiological stream</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="long" default="0x33C0C0"/>
+    </parameter>
+
+    <parameter name="Resp-Display-Image" type="boolean">
+      <notes>Defines whether this stream is displayed along with image</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings default="true"/>
+    </parameter>
+
+    <parameter name="Resp-Display-RT" type="boolean">
+      <notes>Defines whether this stream is displayed in real time on the status bar</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings default="true"/>
+    </parameter>
+
+    <parameter name="Resp-Invert-RT" type="boolean">
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings default="false"/>
+    </parameter>
+
+    <parameter name="Resp-Sub-Sample-Rate" type="range">
+      <notes>The number of samples skipped by the subsample algorithm</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="long" default="100"/>
+    </parameter>
+
+    <parameter name="Resp-Blank-Time" type="range">
+      <notes>The number of samples to wait before deciding we have crossed a threshold</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="long" default="250"/>
+    </parameter>
+
+    <parameter name="Resp-Percent-Peak" type="range">
+      <notes>Percentage of the peak value at which to set the threshold</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="long" default="85"/>
+    </parameter>
+
+    <parameter name="Resp-Minimal-Peak-To-Peak" type="range">
+      <notes>The smallest p2p value we will consider as an event</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="long" default="250"/>
+    </parameter>
+
+    <parameter name="Resp-Percent-Thresh-Change" type="range">
+      <notes>The percentage the threshold is allowed to change on each event</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="long" default="50"/>
+    </parameter>
+
+    <parameter name="Resp-Peak-Threshold" type="range">
+      <notes>The current threshold level being used by the peak detection logic - updated dynamically</notes>
+      <flags>
+        <flag name="Global"/>
+        <flag name="NoEvent"/>
+      </flags>
+      <settings valueType="long" default="10000"/>
+    </parameter>
+
+    <parameter name="Resp-Beats-To-Average" type="range">
+      <notes>Number of beats to average for internal calculations</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="long" default="10"/>
+    </parameter>
+
+    <parameter name="Resp-Average-Period" type="range">
+      <notes>Average period of current respiration - updated dynamically</notes>
+      <flags>
+        <flag name="Global"/>
+        <flag name="NoEvent"/>
+      </flags>
+      <settings valueType="long" default="1500"/>
+    </parameter>
+
+    <parameter name="Resp-Filter-Size" type="range">
+      <notes>Noise threshold limit</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="long" default="32" min="8" max="128"/>
+    </parameter>
+
+    <parameter name="Resp-Noise-Threshold" type="range">
+      <notes>Noise threshold limit</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="long" default="100"/>
+    </parameter>
+
+    <parameter name="Resp-Gate-Timeout" type="range">
+      <notes>Length of time to timeout resp gating</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="3000.0"/>
+    </parameter>
+
+    <parameter name="Resp-Avg-Cycles" type="range">
+      <notes>Resp cycles over which average is calculated</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="long" default="5"/>
+      <display units="cycles"/>
+    </parameter>
+
+    <parameter name="Resp-Avg-Cycles-Time" type="range">
+      <notes>Maximum amount of time for cycles to occur within</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="5000"/>
+      <display units="ms"/>
+    </parameter>
+
+    <parameter name="Resp-Display-Markers" type="boolean">
+      <notes>Show respiration event markers</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings default="false"/>
+    </parameter>
+
+
+    <!-- Bp Derivative -->
+    <parameter name="DpDt-Color" type="range">
+      <notes>Display color for physiological stream</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="long" default="0xA6907A"/>
+    </parameter>
+
+    <parameter name="DpDt-Display-Image" type="boolean">
+      <notes>Defines whether this stream is displayed along with image</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings default="false"/>
+    </parameter>
+
+    <parameter name="DpDt-Display-RT" type="boolean">
+      <notes>Defines whether this stream is displayed in real time on the status bar</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings default="false"/>
+    </parameter>
+
+    <parameter name="ECG-Alarm-Min" type="range">
+      <notes>
+        Alarm rate for ecg
+      </notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" min="0" max="800" default="300"/>
+    </parameter>
+
+    <parameter name="ECG-Alarm-Max" type="range">
+      <notes>
+        Alarm rate for ecg
+      </notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" min="0" max="800" default="650"/>
+    </parameter>
+
+    <parameter name="ECG-Alarm-Enable" type="boolean">
+      <notes>Set if the alarm is enabled</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings default="false"/>
+    </parameter>
+
+    <parameter name="Temp-Alarm-Min" type="range">
+      <notes>
+        Alarm rate for temp
+      </notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" min="0" max="50" default="34"/>
+    </parameter>
+
+    <parameter name="Temp-Alarm-Max" type="range">
+      <notes>
+        Alarm rate for temp
+      </notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" min="0" max="50" default="39"/>
+    </parameter>
+
+    <parameter name="Temp-Alarm-Enable" type="boolean">
+      <notes>Set if the alarm is enabled</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings default="false"/>
+    </parameter>
+
+
+    <parameter name="Resp-Alarm-Min" type="range">
+      <notes>
+        Alarm rate for Resp
+      </notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" min="0" max="200" default="45"/>
+    </parameter>
+
+    <parameter name="Resp-Alarm-Max" type="range">
+      <notes>
+        Alarm rate for Resp
+      </notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" min="0" max="200" default="150"/>
+    </parameter>
+
+    <parameter name="Resp-Alarm-Enable" type="boolean">
+      <notes>Set if the alarm is enabled</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings default="false"/>
+    </parameter>
+
+    <parameter name="ECG-Peak-Direction" type="discrete">
+      <notes>Direction of the ECG peak (positive or negative)</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="long" default="1">
+        <values>
+          <value value="1"/>
+          <value value="2"/>
+        </values>
+      </settings>
+      <display>
+        <labels>
+          <label name="Positive"/>
+          <label name="Negative"/>
+        </labels>
+      </display>
+    </parameter>
+
+    <parameter name="ECG-Gate-Threshold" type="range">
+      <notes>Threshold value for ecg peak detection</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="long" min="-32768" max="32768" default="0"/>
+    </parameter>
+
+    <parameter name="ECG-Gate-Threshold-Set" type="range">
+      <notes>Threshold percentage factor as function of peak for ecg detection</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" min="0" max="100.0" default="80.0"/>
+      <display units="%%"/>
+    </parameter>
+
+    <parameter name="ECG-Gate-Slope" type="range">
+      <notes>Slope value for ecg peak detection</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="0"/>
+    </parameter>
+
+    <parameter name="ECG-Period-Currnet" type="range">
+      <notes>Current average HH for gating use</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="0"/>
+      <display units="ms"/>
+    </parameter>
+
+    <parameter name="ECG-Gate-Min-T1T2-Gap" type="range">
+      <notes>Min gap time between T1 and T2 points</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="15"/>
+      <display units="ms"/>
+    </parameter>
+
+    <parameter name="Calibration-Name" type="range">
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="string" default=""/>
+    </parameter>
+
+  </parameters>
+
+  <parameters subsys="PhysioGating" version="1.0">
+
+    <parameter name="Resp-Gate-Delay" type="range">
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="10"/>
+      <display units="ms"/>
+    </parameter>
+
+  </parameters>
+
+  <parameters subsys="Physio" version="1.0">
+
+    <parameter name="Resp-Enable" type="boolean">
+      <notes>Enables/disables Resp in the application</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings default="true"/>
+    </parameter>
+
+    <parameter name="BP-Enable" type="boolean">
+      <notes>Enables/disables BP in the application</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings default="true"/>
+    </parameter>
+
+    <parameter name="Temp-Enable" type="boolean">
+      <notes>Enables/disables Temp in the application</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings default="true"/>
+    </parameter>
+
+    <parameter name="ECG-Zero" type="range">
+      <notes>Zero position for calibration</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="0"/>
+      <display units="amplitude"/>
+    </parameter>
+
+    <parameter name="ECG-Scale" type="range">
+      <notes>Calibration scale</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="0.076294"/>
+      <display units="mV/amplitude"/>
+    </parameter>
+
+    <parameter name="ECG-Range" type="range">
+      <notes>Display range for physiological stream</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" min="10" max="5120" default="2560"/>
+    </parameter>
+
+    <parameter name="Resp-Zero" type="range">
+      <notes>Zero position for calibration</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="0"/>
+      <display units="amplitude"/>
+    </parameter>
+
+    <parameter name="Resp-Scale" type="range">
+      <notes>Calibration scale</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="0.07489"/>
+      <display units="mV/amplitude"/>
+    </parameter>
+
+    <parameter name="Resp-Range" type="range">
+      <notes>Display range for physiological stream</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" min="10" max="5120" default="2560"/>
+    </parameter>
+
+    <parameter name="BP-Scale" type="range">
+      <notes>
+        The amplification factor that our acquisition hardware provides.
+        This is multiplied by the calibration factor to get the final scaling factor
+        to convert samples into mmHg.
+      </notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="0.00575"/>
+    </parameter>
+
+    <parameter name="BP-Zero" type="range">
+      <notes>Vertical offset for display of physiological stream</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="177.538"/>
+    </parameter>
+
+    <parameter name="BP-Range" type="range">
+      <notes>Display range for physiological stream</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" min="30" max="960" default="120"/>
+      <display units="mmHg"/>
+    </parameter>
+
+    <parameter name="BP-Calibrated" type="boolean">
+      <notes>Bp Calibration perfomred</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings default="false"/>
+    </parameter>
+
+    <parameter name="DpDt-Zero" type="range">
+      <notes>Vertical offset for display of physiological stream</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="0"/>
+    </parameter>
+
+    <parameter name="DpDt-Range" type="range">
+      <notes>Display range for physiological stream</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" min="30" max="15360" default="120"/>
+      <display units="mmHg/s"/>
+    </parameter>
+
+    <parameter name="Temp-Zero" type="range">
+      <notes>Calibration zero. The scaling factor for the Indus THM150</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="0"/>
+      <display units="amplitude"/>
+    </parameter>
+
+    <parameter name="Temp-Scale" type="range">
+      <notes>Calibration scale. The scaling factor for the Indus THM150</notes>
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="double" default="0.001526"/>
+      <display units="C/Amp"/>
+    </parameter>
+
+  </parameters>
+
+  <roots activeRoot="App">
+    <root name="App">
+      <groups>
+        <group name="Settings">
+          <inclusions>
+            <inclusion name="Hardware"/>
+            <inclusion name="Physiological"/>
+            <inclusion name="System"/>
+          </inclusions>
+        </group>
+        <group name="Events">
+          <inclusions>
+            <inclusion name="General"/>
+          </inclusions>
+        </group>
+      </groups>
+    </root>
+    <root name="Acq">
+      <groups>
+        <group name="Mode">
+          <inclusions>
+            <inclusion name="Settings"/>
+            <inclusion name="Physio"/>
+          </inclusions>
+        </group>
+        <group name="B-Mode">
+          <inclusions>
+            <inclusion name="PhysioGating"/>
+          </inclusions>
+        </group>
+        <group name="Color-Mode">
+          <inclusions>
+            <inclusion name="ColorSoft"/>
+          </inclusions>
+        </group>
+        <group name="Pw-Mode">
+          <inclusions>
+            <inclusion name="PwModeSoft"/>
+            <inclusion name="Rx"/>
+          </inclusions>
+        </group>
+        <group name="Pa-Mode">
+          <inclusions>
+            <inclusion name="PaModeSoft"/>
+          </inclusions>
+        </group>
+      </groups>
+    </root>
+    <root name="Hardware">
+      <groups>
+        <group name="Control">
+          <inclusions>
+            <inclusion name="HwSystemControl"/>
+          </inclusions>
+        </group>
+      </groups>
+    </root>
+    <root name="Review0" clone="Acq"/>
+  </roots>
+
+</configuration>

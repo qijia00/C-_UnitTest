@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<operators>
+  <operator name="1" id="1" password="" rights="2" state="0"/>
+  <operator name="2" id="2" password="" rights="2" state="0"/>
+  <operator name="3" id="3" password="" rights="2" state="0"/>
+  <operator name="4" id="4" password="" rights="1" state="0"/>
+  <operator name="5" id="5" password="" rights="1" state="0"/>
+</operators>

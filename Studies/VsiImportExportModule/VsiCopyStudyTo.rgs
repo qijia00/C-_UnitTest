@@ -1,0 +1,26 @@
+HKCR
+{
+	VsiVevo.CopyStudyTo.1 = s 'VsiCopyStudyTo Class'
+	{
+		CLSID = s '{FC7C3E32-6D30-4F6D-A3DF-40270CDDFBE5}'
+	}
+	VsiVevo.CopyStudyTo = s 'VsiCopyStudyTo Class'
+	{
+		CLSID = s '{FC7C3E32-6D30-4F6D-A3DF-40270CDDFBE5}'
+		CurVer = s 'VsiVevo.CopyStudyTo.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {FC7C3E32-6D30-4F6D-A3DF-40270CDDFBE5} = s 'VsiCopyStudyTo Class'
+		{
+			ProgID = s 'VsiVevo.CopyStudyTo.1'
+			VersionIndependentProgID = s 'VsiVevo.CopyStudyTo'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{935BD427-0075-4F2C-B2D9-2ED885CF4DAC}'
+		}
+	}
+}

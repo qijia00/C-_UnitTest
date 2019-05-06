@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{0904B559-BE53-45C1-B723-0CA51CAAC234}</ProjectGuid>
+    <RootNamespace>VsiStudyModule</RootNamespace>
+    <Keyword>AtlProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfAtl>Static</UseOfAtl>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfAtl>Static</UseOfAtl>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\include\VsiRelease.props" />
+    <Import Project="..\..\include\VsiReleaseAtlDll.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\include\VsiDebug.props" />
+    <Import Project="..\..\include\VsiDebugAtlDll.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Link>
+      <AdditionalManifestDependencies>
+      </AdditionalManifestDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Link>
+      <AdditionalManifestDependencies>
+      </AdditionalManifestDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="VsiChangeImageLabel.cpp" />
+    <ClCompile Include="VsiDataListWnd.cpp" />
+    <ClCompile Include="VsiDeleteConfirmation.cpp" />
+    <ClCompile Include="VsiImage.cpp" />
+    <ClCompile Include="..\include\VsiImportExportXml.cpp" />
+    <ClCompile Include="VsiMoveSeries.cpp" />
+    <ClCompile Include="VsiSeries.cpp" />
+    <ClCompile Include="VsiSession.cpp" />
+    <ClCompile Include="VsiStudy.cpp" />
+    <ClCompile Include="VsiStudyBrowser.cpp" />
+    <ClCompile Include="VsiStudyInfo.cpp" />
+    <ClCompile Include="VsiStudyManager.cpp" />
+    <ClCompile Include="VsiStudyModule.cpp" />
+    <ClCompile Include="VsiStudyModule_i.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="VsiChangeMsmntPackageDlg.cpp" />
+    <ClCompile Include="xdlldata.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="VsiStudyModule.def" />
+    <None Include="VsiChangeImageLabel.rgs" />
+    <None Include="VsiDataListWnd.rgs" />
+    <None Include="VsiImage.rgs" />
+    <None Include="VsiMoveSeries.rgs" />
+    <None Include="VsiSeries.rgs" />
+    <None Include="VsiSession.rgs" />
+    <None Include="VsiStudy.rgs" />
+    <None Include="VsiStudyBrowser.rgs" />
+    <None Include="VsiStudyInfo.rgs" />
+    <None Include="VsiStudyManager.rgs" />
+    <None Include="VsiStudyModule.rgs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="VsiStudyModule.idl" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="VsiStudyModule.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="VsiChangeStudyInfoDlg.h" />
+    <ClInclude Include="dllmain.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="VsiChangeImageLabel.h" />
+    <ClInclude Include="VsiDataListWnd.h" />
+    <ClInclude Include="VsiDeleteConfirmation.h" />
+    <ClInclude Include="VsiImage.h" />
+    <ClInclude Include="..\include\VsiImportExportXml.h" />
+    <ClInclude Include="VsiMoveSeries.h" />
+    <ClInclude Include="VsiSearchWnd.h" />
+    <ClInclude Include="VsiSeries.h" />
+    <ClInclude Include="VsiSession.h" />
+    <ClInclude Include="VsiStudy.h" />
+    <ClInclude Include="VsiStudyBrowser.h" />
+    <ClInclude Include="VsiStudyInfo.h" />
+    <ClInclude Include="VsiStudyManager.h" />
+    <ClInclude Include="..\..\include\VsiStudyModule.h" />
+    <ClInclude Include="VsiChangeMsmntPackageDlg.h" />
+    <ClInclude Include="xdlldata.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="VsiStudyModule.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\include\VsiIdl.vcxproj">
+      <Project>{351b346e-31a5-496a-a805-918288bb32a9}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\VsiImportExportModule\VsiImportExportModule.vcxproj">
+      <Project>{744492d5-3b81-40a8-9431-b627ab75240f}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

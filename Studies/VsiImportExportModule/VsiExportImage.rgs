@@ -1,0 +1,26 @@
+HKCR
+{
+	VsiVevo.ExportImage.1 = s 'VsiExportImage Class'
+	{
+		CLSID = s '{2926FCFD-B3DB-462F-91DB-D74DDEE37671}'
+	}
+	VsiVevo.ExportImage = s 'VsiExportImage Class'
+	{
+		CLSID = s '{2926FCFD-B3DB-462F-91DB-D74DDEE37671}'
+		CurVer = s 'VsiVevo.ExportImage.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {2926FCFD-B3DB-462F-91DB-D74DDEE37671} = s 'VsiExportImage Class'
+		{
+			ProgID = s 'VsiVevo.ExportImage.1'
+			VersionIndependentProgID = s 'VsiVevo.ExportImage'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{935BD427-0075-4F2C-B2D9-2ED885CF4DAC}'
+		}
+	}
+}

@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{51d36af8-3d11-43fa-b7b4-813a27bd19b9}</UniqueIdentifier>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Gif">
+      <UniqueIdentifier>{a6765ebc-daa3-410c-b55f-12283cbd4dfe}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VsiCdDvdWriterView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VsiCopyStudyFrom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VsiCopyStudyTo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VsiCSVWriter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VsiExportImage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VsiExportReport.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VsiExportTable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VsiImpExpUtility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VsiImportExportModule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\include\VsiImportExportXml.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VsiReportExportStatus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VsiStudyMover.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VsiImportExportModule_i.c">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VsiGifAnimate.cpp">
+      <Filter>Gif</Filter>
+    </ClCompile>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xdlldata.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="VsiImportExportModule.def">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="VsiCdDvdWriterView.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VsiCopyStudyFrom.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VsiCopyStudyTo.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VsiExportImage.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VsiGifAnimate.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VsiImportExportModule.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VsiStudyMover.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="VsiImportExportModule.idl">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="VsiImportExportModule.manifest">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiCdDvdWriterView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiCopyStudyFrom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiCopyStudyTo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiCSVWriter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiExportImage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiExportReport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiExportTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\VsiImportExportXml.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiReportExportStatus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiStudyMover.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\VsiImportExportModule.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiGifAnimate.h">
+      <Filter>Gif</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiGifEncode.h">
+      <Filter>Gif</Filter>
+    </ClInclude>
+    <ClInclude Include="dllmain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xdlldata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiExportImageCineDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiExportImageFrameDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiExportImageDicomDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiExportImageReportDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiExportImageGraphDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiExportImagePhysioDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VsiExportImageTableDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="VsiImportExportModule.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,1062 @@
+/*******************************************************************************
+**
+**  Copyright (c) 1999-2012 VisualSonics Inc. All Rights Reserved.
+**
+**  VsiStudyModule.idl
+**
+**	Description:
+**		IDL source for VsiStudyModule
+**
+********************************************************************************/
+
+// This file will be processed by the MIDL tool to
+// produce the type library (VsiStudyModule.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+import "VsiAppModule.idl";
+
+// Required versions
+cpp_quote("#define VSI_IMAGE_VERSION_REQUIRED_VEVO2100_SIERRA_4		L\"1.3.0.3269\"")
+
+// Added new LV Mass cacluations and B-Mode color in Sierra5
+cpp_quote("#define VSI_IMAGE_VERSION_REQUIRED_VEVO2100		L\"1.5.0.5045\"")
+cpp_quote("#define VSI_STUDY_VERSION_REQUIRED_VEVO2100		L\"1.1.0.0\"")
+
+// Session
+cpp_quote("#define VSI_SESSION_SLOT_MAX						2")
+
+
+// View
+cpp_quote("#define VSI_VIEW_STUDYBROWSER					L\"StudyBrowser\"")
+cpp_quote("#define VSI_VIEW_STUDY_INFO						L\"StudyInfo\"")
+cpp_quote("#define VSI_VIEW_MOVE_SERIES						L\"MoveSeries\"")
+
+
+// Image
+cpp_quote("#define VSI_IMAGE_XML_VERSION_2					0x00000002")
+cpp_quote("#define VSI_IMAGE_XML_VERSION					VSI_IMAGE_XML_VERSION_2")
+
+// File name
+cpp_quote("#define VSI_FILE_MEASUREMENT_INFO				L\"MeasurementInfo.vxml\"")		// common
+cpp_quote("#define VSI_FILE_MEASUREMENT						L\"Measurement.vxml\"")
+// File to record active series information
+cpp_quote("#define VSI_FILE_ACTIVE_SERIES					L\"ActiveSeries.xml\"")
+
+// File extension
+cpp_quote("#define VSI_FILE_EXT_TMP							L\"tmp\"")
+cpp_quote("#define VSI_FILE_EXT_IMAGE						L\"vxml\"")
+cpp_quote("#define VSI_FILE_EXT_IMAGE_RAW_BSCAN				L\"bimg\"")
+cpp_quote("#define VSI_FILE_EXT_IMAGE_RAW_MSCAN				L\"mimg\"")
+cpp_quote("#define VSI_FILE_EXT_IMAGE_RAW_PWD				L\"dimg\"")
+cpp_quote("#define VSI_FILE_EXT_IMAGE_RAW_3D				L\"3img\"")
+cpp_quote("#define VSI_FILE_EXT_IMAGE_RAW_COLOR				L\"cimg\"")
+cpp_quote("#define VSI_FILE_EXT_IMAGE_RAW_CONTRAST			L\"nimg\"")
+cpp_quote("#define VSI_FILE_EXT_IMAGE_RAW_ADVCONTRAST		L\"animg\"")
+cpp_quote("#define VSI_FILE_EXT_IMAGE_RAW_CONTRAST_BMODE	L\"nbimg\"")
+cpp_quote("#define VSI_FILE_EXT_IMAGE_RAW_PA				L\"paimg\"")
+cpp_quote("#define VSI_FILE_EXT_IMAGE_RAW_PHYSIO			L\"pimg\"")
+cpp_quote("#define VSI_FILE_EXT_IMAGE_THUMB					L\"png\"")
+cpp_quote("#define VSI_FILE_EXT_PV_LOOP_DATA				L\"pvd\"")
+cpp_quote("#define VSI_FILE_EXT_CONTRAST_REGION_DATA		L\"crd\"")
+cpp_quote("#define VSI_FILE_EXT_CARDIAC_REGION_DATA			L\"card\"")
+cpp_quote("#define VSI_FILE_EXT_MEASUREMENT					L\"mxml\"")
+cpp_quote("#define VSI_FILE_EXT_IMAGE_RAW_ASCAN				L\"aimg\"")
+cpp_quote("#define VSI_FILE_EXT_IMAGE_OVERLAY				L\"overlay.bmp\"")
+
+
+// Study Manager events
+cpp_quote("#define VSI_STUDY_MGR_EVENT_UPDATE				0x00000001")
+
+
+// Data Types
+typedef [v1_enum] enum
+{
+	VSI_DATA_TYPE_NONE						= 0x00000000,
+	VSI_DATA_TYPE_STUDY_LIST				= 0x00000001,  // Load/reload study list in Study Manager
+	VSI_DATA_TYPE_SERIES_LIST				= 0x00000002,  // Load series list in Study
+	VSI_DATA_TYPE_IMAGE_LIST				= 0x00000004,  // Load image list in Series
+	VSI_DATA_TYPE_NO_SESSION_LINK			= 0x00000008,  // Don't link to session when loading
+	VSI_DATA_TYPE_FRAME						= 0x00000010,  // Saving frame
+	VSI_DATA_TYPE_LOOP						= 0x00000020,  // Saving loop
+	VSI_DATA_TYPE_RESAVE					= 0x00000040,  // Re-saving
+	VSI_DATA_TYPE_IMAGE_PARAMS_ONLY			= 0x00000100,  // Load/save image parameters only (no mode data)
+	VSI_DATA_TYPE_MSMNT_PARAMS_ONLY			= 0x00000200,  // Load/save measurement parameters only
+	VSI_DATA_TYPE_GET_COUNT_ONLY			= 0x00000400,  // Get list count only
+} VSI_DATA_TYPES;
+
+
+// Fields length
+typedef [v1_enum] enum
+{
+	VSI_STUDY_NAME_MAX = 40,
+	VSI_SERIES_NAME_MAX = 40,
+	VSI_IMAGE_NAME_MAX = 40,
+	VSI_NOTES_MAX = 2048,
+	VSI_FIELD_MAX = 80,  // Any other fields
+} VSI_IMAGE_MAX;
+
+
+// Data list item type
+typedef [v1_enum] enum
+{
+	VSI_DATA_LIST_NONE   = 0x00000000,
+	VSI_DATA_LIST_STUDY  = 0x00000001,
+	VSI_DATA_LIST_SERIES = 0x00000002,
+	VSI_DATA_LIST_IMAGE  = 0x00000004,
+} VSI_DATA_LIST_TYPE;
+
+
+interface IVsiImage;
+interface IVsiSeries;
+interface IVsiStudy;
+
+
+[
+	object,
+	uuid(96F12A86-E5EA-44BC-BEDB-C04D80640696),
+	helpstring("IVsiImage Interface"),
+	pointer_default(unique)
+]
+interface IVsiImage : IUnknown
+{
+	HRESULT Clone([out] IVsiImage **ppImage);
+
+	typedef [v1_enum] enum
+	{
+		VSI_IMAGE_ERROR_NONE					= 0x00000000,
+		VSI_IMAGE_ERROR_LOAD_XML				= 0x00000001,  // Parse XML file failed
+		VSI_IMAGE_ERROR_VERSION_INCOMPATIBLE	= 0x00000002,  // Cannot open image in this version of the software
+	} VSI_IMAGE_ERROR;
+
+	cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(VSI_IMAGE_ERROR);")
+
+	HRESULT GetErrorCode([out] VSI_IMAGE_ERROR *pdwErrorCode);
+
+	HRESULT GetDataPath([out, string] LPOLESTR *ppszPath);
+	HRESULT SetDataPath([in, string] LPCOLESTR pszPath);
+	HRESULT GetSeries([out] IVsiSeries **ppSeries);
+	HRESULT SetSeries([in] IVsiSeries *pSeries);
+	HRESULT GetStudy([out] IVsiStudy **ppStudy);
+
+	typedef [v1_enum] enum
+	{
+		VSI_PROP_IMAGE_MIN = 2000,
+		VSI_PROP_IMAGE_ID,						// VT_BSTR
+		VSI_PROP_IMAGE_ID_SERIES,				// VT_BSTR
+		VSI_PROP_IMAGE_ID_STUDY,				// VT_BSTR
+		VSI_PROP_IMAGE_NS,						// VT_BSTR - Namespace
+		VSI_PROP_IMAGE_NAME,					// VT_BSTR
+		VSI_PROP_IMAGE_ACQUIRED_DATE,			// VT_DATE
+		VSI_PROP_IMAGE_CREATED_DATE,			// VT_DATE
+		VSI_PROP_IMAGE_MODIFIED_DATE,			// VT_DATE
+		VSI_PROP_IMAGE_MODE,					// VT_BSTR - Mode name
+		VSI_PROP_IMAGE_MODE_DISPLAY,			// VT_BSTR - Mode name for display
+		VSI_PROP_IMAGE_LENGTH,					// VT_R8
+		VSI_PROP_IMAGE_ACQID,					// VT_BSTR
+		VSI_PROP_IMAGE_KEY,						// VT_BSTR
+		VSI_PROP_IMAGE_VERSION_REQUIRED,		// VT_BSTR
+		VSI_PROP_IMAGE_VERSION_CREATED,			// VT_BSTR - Version of the software when image was created
+		VSI_PROP_IMAGE_VERSION_MODIFIED,		// VT_BSTR - Version of the software when image was modified
+		VSI_PROP_IMAGE_FRAME_TYPE,				// VT_BOOL
+		VSI_PROP_IMAGE_VERSION,					// VT_BSTR - Internal version
+		VSI_PROP_IMAGE_THUMBNAIL_FRAME,			// VT_R8
+		VSI_PROP_IMAGE_RF_DATA,					// VT_BOOL - true if RF data
+		
+		VSI_PROP_IMAGE_VEVOSTRAIN,				// VT_BOOL - true if VEVOSTRAIN processing has been applied to this image
+		VSI_PROP_IMAGE_VEVOSTRAIN_UPDATED,		// VT_BOOL - true if image has been updated since VEVOSTRAIN processing
+		VSI_PROP_IMAGE_VEVOSTRAIN_SERIES_NAME,	// VT_BSTR - series name at the time that VevoStrain was processed
+		VSI_PROP_IMAGE_VEVOSTRAIN_STUDY_NAME,	// VT_BSTR - study name at the time that VevoStrain was processed
+		VSI_PROP_IMAGE_VEVOSTRAIN_NAME,			// VT_BSTR - image label at the time that VevoStrain was processed
+		VSI_PROP_IMAGE_VEVOSTRAIN_ANIMAL_ID,	// VT_BSTR - Animal ID at the time that VevoStrain was processed
+
+		VSI_PROP_IMAGE_VEVOCQ,					// VT_BOOL - true if VEVOSTRAIN processing has been applied to this image
+		VSI_PROP_IMAGE_VEVOCQ_UPDATED,			// VT_BOOL - true if image has been updated since VEVOSTRAIN processing
+		VSI_PROP_IMAGE_VEVOCQ_SERIES_NAME,		// VT_BSTR - series name at the time that VevoStrain was processed
+		VSI_PROP_IMAGE_VEVOCQ_STUDY_NAME,		// VT_BSTR - study name at the time that VevoStrain was processed
+		VSI_PROP_IMAGE_VEVOCQ_NAME,				// VT_BSTR - image label at the time that VevoStrain was processed
+		VSI_PROP_IMAGE_VEVOCQ_ANIMAL_ID,		// VT_BSTR - Animal ID at the time that VevoStrain was processed
+
+		VSI_PROP_IMAGE_ADVCONTMIP,				// VT_BOOL - true if Advanced contrast mip processing has been applied to this image
+		VSI_PROP_IMAGE_PA_ACQ_TYPE,				// VT_UI4 - acquisition type for PA mode (0=single, 1=oxy, 2=multi, 3=spectro) See VSI_PARAMETER_PA_MODE_ACQUISITION_MODE
+		
+		VSI_PROP_IMAGE_EKV,						// VT_BOOL - true if EKV data
+
+		VSI_PROP_IMAGE_ANALYSIS,				// VT_BSTR - temp data for the analysis browser
+
+		VSI_PROP_IMAGE_LAST_MODIFIED_BY,		// VT_BSTR - Operator name last modified
+		VSI_PROP_IMAGE_LAST_MODIFIED_DATE,		// VT_DATE - Date last modified
+
+		VSI_PROP_IMAGE_MAX						// maximum value - leave at end
+	} VSI_PROP_IMAGE;
+
+	HRESULT Compare(
+		[in] IVsiImage *pImage,
+		[in] VSI_PROP_IMAGE dwProp,
+		[out] int *piCmp);
+
+	HRESULT GetProperty([in] VSI_PROP_IMAGE dwProp, [out] VARIANT* pvtValue);
+	HRESULT SetProperty([in] VSI_PROP_IMAGE dwProp, [in] const VARIANT *pvtValue);
+
+	HRESULT GetThumbnailFile([out, string] LPOLESTR *ppszFile);
+};
+
+
+[
+	object,
+	uuid(82D6A268-2710-4538-B86D-464F7FEF0ACE),
+	helpstring("IVsiPersistImage Interface"),
+	pointer_default(unique)
+]
+interface IVsiPersistImage : IUnknown
+{
+	// LoadImageData - Initialize() is not required
+	HRESULT LoadImageData(
+		[in, string] LPCOLESTR pszFile,
+		[in] IUnknown *pUnkMode,	// IVsiMode
+		[in] IUnknown *pUnkPdm,		// IVsiPdm
+		[in] DWORD dwFlags);		// VSI_DATA_TYPE_*
+	HRESULT SaveImageData(
+		[in, string] LPCOLESTR pszFile,
+		[in] IUnknown *pUnkMode,	// IVsiMode
+		[in] IUnknown *pUnkPdm,		// IVsiPdm
+		[in] DWORD dwFlags);		// VSI_DATA_TYPE_*
+	HRESULT ResaveProperties([in, string] LPCOLESTR pszFile);
+};
+
+
+[
+	uuid(8074C4BC-BC72-47fb-85D5-9396922B375B),
+	helpstring("IVsiEnumImage Interface"),
+	pointer_default(unique),
+	local
+]
+interface IVsiEnumImage : IUnknown
+{
+	HRESULT Next(
+		[in] ULONG celt,
+		[out, size_is(celt), length_is(*pCeltFetched)] IVsiImage **rgelt,
+		[out] ULONG* pCeltFetched);
+	HRESULT Skip([in] ULONG celt);
+	HRESULT Reset();
+	HRESULT Clone([out] IVsiEnumImage **ppEnum);
+};
+
+
+[
+	object,
+	uuid(D8BF41A7-C7A2-48B5-BAE6-FA3B639A329E),
+	helpstring("IVsiSeries Interface"),
+	pointer_default(unique)
+]
+interface IVsiSeries : IUnknown
+{
+	HRESULT Clone([out] IVsiSeries **ppSeries);
+
+	typedef [v1_enum] enum
+	{
+		VSI_SERIES_ERROR_NONE					= 0x00000000,
+		VSI_SERIES_ERROR_LOAD_XML				= 0x00000001,  // Parse XML file failed
+		VSI_SERIES_ERROR_LOAD_IMAGES			= 0x00000002,  // Load images failed
+		VSI_SERIES_ERROR_VERSION_INCOMPATIBLE	= 0x00000004,  // Cannot open series in this version of the software
+	} VSI_SERIES_ERROR;
+
+	cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(VSI_SERIES_ERROR);")
+
+	HRESULT GetErrorCode([out] VSI_SERIES_ERROR *pdwErrorCode);
+
+	HRESULT GetDataPath([out, string] LPOLESTR *ppszPath);
+	HRESULT SetDataPath([in, string] LPCOLESTR pszPath);
+	HRESULT GetStudy([out] IVsiStudy **ppStudy);
+	HRESULT SetStudy([in] IVsiStudy *pStudy);
+
+	typedef [v1_enum] enum
+	{
+		VSI_PROP_SERIES_MIN	= 1000,
+		VSI_PROP_SERIES_ID,					// VT_BSTR - Series ID
+		VSI_PROP_SERIES_ID_STUDY,			// VT_BSTR - Study ID [created]
+		VSI_PROP_SERIES_NS,					// VT_BSTR - Namespace
+		VSI_PROP_SERIES_NAME,				// VT_BSTR - Series name
+		VSI_PROP_SERIES_CREATED_DATE,		// VT_DATE
+		VSI_PROP_SERIES_ACQUIRED_BY,		// VT_BSTR
+		VSI_PROP_SERIES_EXPORTED,			// VT_BOOL
+		VSI_PROP_SERIES_VERSION_REQUIRED,	// VT_BSTR
+		VSI_PROP_SERIES_VERSION_CREATED,	// VT_BSTR - Version of the software when series was created
+		VSI_PROP_SERIES_VERSION_MODIFIED,	// VT_BSTR - Version of the software when series was modified
+		VSI_PROP_SERIES_NOTES,				// VT_BSTR
+		VSI_PROP_SERIES_APPLICATION,		// VT_BSTR
+		VSI_PROP_SERIES_MSMNT_PACKAGE,		// VT_BSTR
+		VSI_PROP_SERIES_ANIMAL_ID,			// VT_BSTR
+		VSI_PROP_SERIES_ANIMAL_COLOR,		// VT_BSTR
+		VSI_PROP_SERIES_STRAIN,				// VT_BSTR
+		VSI_PROP_SERIES_SOURCE,				// VT_BSTR
+		VSI_PROP_SERIES_WEIGHT,				// VT_BSTR
+		VSI_PROP_SERIES_TYPE,				// VT_BSTR
+		VSI_PROP_SERIES_DATE_OF_BIRTH,		// VT_DATE
+		VSI_PROP_SERIES_HEART_RATE,			// VT_BSTR
+		VSI_PROP_SERIES_BODY_TEMP,			// VT_BSTR
+		VSI_PROP_SERIES_SEX,				// VT_BSTR
+		VSI_PROP_SERIES_PREGNANT,			// VT_BOOL
+		VSI_PROP_SERIES_DATE_MATED,			// VT_DATE
+		VSI_PROP_SERIES_DATE_PLUGGED,		// VT_DATE
+		VSI_PROP_SERIES_CUSTOM1,			// VT_BSTR
+		VSI_PROP_SERIES_CUSTOM2,			// VT_BSTR
+		VSI_PROP_SERIES_CUSTOM3,			// VT_BSTR
+		VSI_PROP_SERIES_CUSTOM4,			// VT_BSTR
+		VSI_PROP_SERIES_CUSTOM5,			// VT_BSTR
+		VSI_PROP_SERIES_CUSTOM6,			// VT_BSTR
+		VSI_PROP_SERIES_CUSTOM7,			// VT_BSTR
+		VSI_PROP_SERIES_CUSTOM8,			// VT_BSTR
+		VSI_PROP_SERIES_CUSTOM9,			// VT_BSTR
+		VSI_PROP_SERIES_CUSTOM10,			// VT_BSTR
+		VSI_PROP_SERIES_CUSTOM11,			// VT_BSTR
+		VSI_PROP_SERIES_CUSTOM12,			// VT_BSTR
+		VSI_PROP_SERIES_CUSTOM13,			// VT_BSTR
+		VSI_PROP_SERIES_CUSTOM14,			// VT_BSTR
+		VSI_PROP_SERIES_COLOR_INDEX,		// VT_I4
+		VSI_PROP_SERIES_LAST_MODIFIED_BY,	// VT_BSTR - Operator name last modified
+		VSI_PROP_SERIES_LAST_MODIFIED_DATE,	// VT_DATE - Date last modified
+		VSI_PROP_SERIES_MAX,
+	} VSI_PROP_SERIES;
+
+	HRESULT Compare(
+		[in] IVsiSeries *pSeries,
+		[in] VSI_PROP_SERIES dwProp,
+		[out] int *piCmp);
+
+	HRESULT GetProperty([in] VSI_PROP_SERIES dwProp, [out] VARIANT* pvtValue);
+	HRESULT SetProperty([in] VSI_PROP_SERIES dwProp, [in] const VARIANT *pvtValue);
+	HRESULT GetPropertyLabel(
+		[in] VSI_PROP_SERIES dwProp,
+		[out, string] LPOLESTR *ppszLabel);
+
+	HRESULT AddImage([in] IVsiImage *pImage);
+	HRESULT RemoveImage([in, string] LPCOLESTR pszId);
+	HRESULT RemoveAllImages();
+
+	HRESULT GetImageCount([out] LONG *plCount, [in] BOOL *pbCancel);
+	HRESULT GetImageEnumerator(
+		[in] VSI_PROP_IMAGE sortBy,
+		[in] BOOL bDescending,
+		[out] IVsiEnumImage **ppEnum,
+		[in] BOOL *pbCancel);
+	HRESULT GetImageFromIndex(
+		[in] int iIndex,
+		[in] VSI_PROP_IMAGE sortBy,
+		[in] BOOL bDescending,
+		[out] IVsiImage **ppImage);
+	HRESULT GetImage(
+		[in, string] LPCOLESTR pszId,
+		[out] IVsiImage **ppImage);
+	HRESULT GetItem(
+		[in, string] LPCOLESTR pszNs,
+		[out] IUnknown **ppUnk);
+};
+
+
+[
+	object,
+	uuid(2AA2376C-F55D-497e-90D0-D18B8BFF0D76),
+	helpstring("IVsiPersistSeries Interface"),
+	pointer_default(unique)
+]
+interface IVsiPersistSeries : IUnknown
+{
+	// LoadSeriesData - Initialize() is not required
+	HRESULT LoadSeriesData(
+		[in, unique, string] LPCOLESTR pszFile,
+		[in] DWORD dwFlags,  // VSI_DATA_TYPE_IMAGE_LIST or VSI_DATA_TYPE_NO_SESSION_LINK or 0
+		[in] BOOL *pbCancel);
+	HRESULT SaveSeriesData(
+		[in, string] LPCOLESTR pszFile,
+		[in] DWORD dwFlags);  // VSI_DATA_TYPE_*
+	HRESULT LoadPropertyLabel(
+		[in, string] LPCOLESTR pszFile);
+};
+
+
+[
+	uuid(3B236BC5-ABF4-4210-BEE1-1817D333342B),
+	helpstring("IVsiEnumSeries Interface"),
+	pointer_default(unique),
+	local
+]
+interface IVsiEnumSeries : IUnknown
+{
+	HRESULT Next(
+		[in] ULONG celt,
+		[out, size_is(celt), length_is(*pCeltFetched)] IVsiSeries **rgelt,
+		[out] ULONG* pCeltFetched
+	);
+	HRESULT Skip([in] ULONG celt);
+	HRESULT Reset();
+	HRESULT Clone([out] IVsiEnumSeries **ppEnum);
+};
+
+
+[
+	object,
+	uuid(564FC61F-930F-46E8-AA4C-3CE8F345E8E7),
+	helpstring("IVsiStudy Interface"),
+	pointer_default(unique)
+]
+interface IVsiStudy : IUnknown
+{
+	HRESULT Clone([out] IVsiStudy **ppStudy);
+
+	typedef [v1_enum] enum
+	{
+		VSI_STUDY_ERROR_NONE					= 0x00000000,
+		VSI_STUDY_ERROR_LOAD_XML				= 0x00000001,  // Parse XML file failed
+		VSI_STUDY_ERROR_LOAD_SERIES				= 0x00000002,  // Load series failed
+		VSI_STUDY_ERROR_VERSION_INCOMPATIBLE	= 0x00000004,  // Cannot open study in this version of the software
+	} VSI_STUDY_ERROR;
+
+	cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(VSI_STUDY_ERROR);")
+
+	HRESULT GetErrorCode([out] VSI_STUDY_ERROR *pdwErrorCode);
+
+	HRESULT GetDataPath([out, string] LPOLESTR *ppszPath);
+	HRESULT SetDataPath([in, string] LPCOLESTR pszPath);
+
+	typedef [v1_enum] enum
+	{
+		VSI_PROP_STUDY_MIN = 1,
+		VSI_PROP_STUDY_ID,						// VT_BSTR - Instance ID - Current
+		VSI_PROP_STUDY_ID_CREATED,				// VT_BSTR - Instance ID - Creation
+		VSI_PROP_STUDY_ID_COPIED,				// VT_BSTR - Instance ID - Copy from
+		VSI_PROP_STUDY_NS,						// VT_BSTR - Namespace
+		VSI_PROP_STUDY_NAME,					// VT_BSTR - Study name
+		VSI_PROP_STUDY_LOCKED,					// VT_BOOL - Lock state
+		VSI_PROP_STUDY_CREATED_DATE,			// VT_DATE - Date created
+		VSI_PROP_STUDY_OWNER,					// VT_BSTR - Owner name
+		VSI_PROP_STUDY_EXPORTED,				// VT_BOOL - Exported before
+		VSI_PROP_STUDY_NOTES,					// VT_BSTR - Study notes
+		VSI_PROP_STUDY_GRANTING_INSTITUTION,	// VT_BSTR - Institution
+		VSI_PROP_STUDY_VERSION_REQUIRED,		// VT_BSTR - Version required to open this study
+		VSI_PROP_STUDY_VERSION_CREATED,			// VT_BSTR - Version of the software when study was created
+		VSI_PROP_STUDY_VERSION_MODIFIED,		// VT_BSTR - Version of the software when study was modified
+		VSI_PROP_STUDY_ACCESS,					// VT_BSTR - Study Access: VSI_STUDY_ACCESS_*
+		VSI_PROP_STUDY_LAST_MODIFIED_BY,		// VT_BSTR - Operator name last modified
+		VSI_PROP_STUDY_LAST_MODIFIED_DATE,		// VT_DATE - Date last modified
+		VSI_PROP_STUDY_MAX,
+	} VSI_PROP_STUDY;
+
+	// VSI_PROP_STUDY_ACCESS
+	cpp_quote("#define VSI_STUDY_ACCESS_PRIVATE				L\"private\"")
+	cpp_quote("#define VSI_STUDY_ACCESS_GROUP				L\"group\"")
+	cpp_quote("#define VSI_STUDY_ACCESS_PUBLIC				L\"public\"")
+
+	HRESULT Compare(
+		[in] IVsiStudy *pStudy,
+		[in] VSI_PROP_STUDY dwProp,
+		[out] int *piCmp);
+
+	HRESULT GetProperty([in] VSI_PROP_STUDY dwProp, [out] VARIANT* pvtValue);
+	HRESULT SetProperty([in] VSI_PROP_STUDY dwProp, [in] const VARIANT *pvtValue);
+
+	HRESULT AddSeries([in] IVsiSeries *pSeries);
+	HRESULT RemoveSeries([in, string] LPCOLESTR pszId);
+	HRESULT RemoveAllSeries();
+
+	HRESULT GetSeriesCount([out] LONG *plCount, [in] BOOL *pbCancel);
+	HRESULT GetSeriesEnumerator(
+		[in] VSI_PROP_SERIES sortBy,
+		[in] BOOL bDescending,
+		[out] IVsiEnumSeries **ppEnum,
+		[in] BOOL *pbCancel);
+	HRESULT GetSeries(
+		[in, string] LPCOLESTR pszId,
+		[out] IVsiSeries **ppSeries);
+	HRESULT GetItem(
+		[in, string] LPCOLESTR pszNs,
+		[out] IUnknown **ppUnk);
+};
+
+
+[
+	object,
+	uuid(D7B75D96-D9D0-40c7-9FB8-A620951D6CBC),
+	helpstring("IVsiPersistStudy Interface"),
+	pointer_default(unique)
+]
+interface IVsiPersistStudy : IUnknown
+{
+	// LoadStudyData - Initialize() is not required
+	HRESULT LoadStudyData(
+		[in, unique, string] LPCOLESTR pszFile,
+		[in] DWORD dwFlags,  // VSI_DATA_TYPE_SERIES_LIST or VSI_DATA_TYPE_NO_SESSION_LINK or 0
+		[in] BOOL *pbCancel);
+	HRESULT SaveStudyData(
+		[in, string] LPCOLESTR pszFile,
+		[in] DWORD dwFlags);  // VSI_DATA_TYPE_*
+};
+
+
+[
+	uuid(D542B6C9-7785-4a19-A689-DCEA3855CA17),
+	helpstring("IVsiEnumStudy Interface"),
+	pointer_default(unique),
+	local
+]
+interface IVsiEnumStudy : IUnknown
+{
+	HRESULT Next(
+		[in] ULONG celt,
+		[out, size_is(celt), length_is(*pCeltFetched)] IVsiStudy **rgelt,
+		[out] ULONG* pCeltFetched
+	);
+	HRESULT Skip([in] ULONG celt);
+	HRESULT Reset();
+	HRESULT Clone([out] IVsiEnumStudy **ppEnum);
+};
+
+
+[
+	object,
+	uuid(111DFA6E-6010-4B03-9522-F1A2DED48117),
+	helpstring("IVsiStudyManager Interface"),
+	pointer_default(unique)
+]
+interface IVsiStudyManager : IUnknown
+{
+	HRESULT Initialize([in] IVsiApp *pApp);
+	HRESULT Uninitialize();
+
+	typedef struct tagVSI_LOAD_STUDY_FILTER
+	{
+		LPCOLESTR pszOperator;
+		LPCOLESTR pszGroup;
+		BOOL bPublic;
+	} VSI_LOAD_STUDY_FILTER;
+
+	HRESULT LoadData(
+		[in, string] LPCOLESTR pszPath,
+		[in] DWORD dwTypes,		// VSI_DATA_TYPE_STUDY_LIST or 0
+		[in] const VSI_LOAD_STUDY_FILTER *pFilter);
+
+	HRESULT LoadStudy(
+		[in, string] LPCOLESTR pszPath,
+		[in] BOOL bFailAllow,
+		[out] IVsiStudy** ppStudy);
+
+	HRESULT GetStudyCount([out] LONG *plCount);
+	HRESULT GetStudyEnumerator(
+		[in] BOOL bExcludeCorruptedAndNotCompatible,
+		[out] IVsiEnumStudy **ppEnum);
+	HRESULT GetStudy(
+		[in, string] LPCOLESTR pszNs,
+		[out] IVsiStudy **ppStudy);
+	HRESULT GetItem([in, string] LPCOLESTR pszNs, [out] IUnknown **ppUnk);
+
+	// S_OK - present; S_FALSE - not present
+	HRESULT GetIsItemPresent([in, string] LPCOLESTR pszId);
+	// S_OK - present; S_FALSE - not present
+	HRESULT GetIsStudyPresent(
+		[in] VSI_PROP_STUDY dwIdType,  // VSI_PROP_STUDY_ID or VSI_PROP_STUDY_ID_CREATED
+		[in, string] LPCOLESTR pszId,
+		[in, string] LPCOLESTR pszOperatorName,
+		[out] IVsiStudy **ppStudy);
+
+	HRESULT AddStudy([in] IVsiStudy *pStudy);
+	HRESULT RemoveStudy([in, string] LPCOLESTR pszNs);
+
+	HRESULT Update([in] IXMLDOMDocument *pXmlDoc);
+
+	HRESULT GetStudyCopyNumber(
+		[in, string] LPCOLESTR pszCreatedId,
+		[in, string] LPCOLESTR pszOwner,
+		[out] int* pnNum);
+
+	HRESULT MoveSeries(
+		[in] IVsiSeries *pSrcSeries,
+		[in] IVsiStudy *pDesStudy,
+		[out, string] LPOLESTR *ppResult);
+};
+
+
+[
+	object,
+	uuid(A191A897-EEA1-46d8-A9C0-4D433C406961),
+	helpstring("IVsiSession Interface"),
+	pointer_default(unique)
+]
+interface IVsiSession : IUnknown
+{
+	typedef [v1_enum] enum
+	{
+		VSI_SLOT_ACTIVE	= -1,
+	} VSI_SLOT;
+
+	HRESULT Initialize([in] IVsiApp *pApp);
+	HRESULT Uninitialize();
+
+	typedef [v1_enum] enum
+	{
+		VSI_SESSION_MODE_NONE		= 0,
+		VSI_SESSION_MODE_QUICK		= 1,
+		VSI_SESSION_MODE_NEW_STUDY	= 2,
+		VSI_SESSION_MODE_NEW_SERIES	= 3,
+	} VSI_SESSION_MODE;
+	
+	HRESULT GetSessionMode([out] VSI_SESSION_MODE *pMode);
+	HRESULT SetSessionMode([in] VSI_SESSION_MODE mode);
+
+	HRESULT GetPrimaryStudy([out] IVsiStudy **ppStudy);
+	HRESULT SetPrimaryStudy(
+		[in] IVsiStudy *pStudy,
+		[in] BOOL bJournal);
+	HRESULT GetPrimarySeries([out] IVsiSeries **ppSeries);
+	HRESULT SetPrimarySeries(
+		[in] IVsiSeries *pSeries,
+		[in] BOOL bJournal);
+
+	HRESULT GetActiveSlot([out] int *piSlot);
+	HRESULT SetActiveSlot([in] int iSlot);
+
+	HRESULT GetStudy(
+		[in] int iSlot,
+		[out] IVsiStudy **ppStudy);
+	HRESULT SetStudy(
+		[in] int iSlot,
+		[in] IVsiStudy *pStudy,
+		[in] BOOL bJournal);
+
+	HRESULT GetSeries(
+		[in] int iSlot,
+		[out] IVsiSeries **ppSeries);
+	HRESULT SetSeries(
+		[in] int iSlot,
+		[in] IVsiSeries *pSeries,
+		[in] BOOL bJournal);
+
+	HRESULT GetImage(
+		[in] int iSlot,
+		[out] IVsiImage **ppImage);
+	HRESULT SetImage(
+		[in] int iSlot,
+		[in] IVsiImage *pImage,
+		[in] BOOL bSetReviewed,
+		[in] BOOL bJournal);
+
+	HRESULT GetMode(
+		[in] int iSlot,
+		[out] IUnknown **ppUnkMode);
+	HRESULT SetMode(
+		[in] int iSlot,
+		[in] IUnknown *pUnkMode);
+
+	HRESULT GetModeView(
+		[in] int iSlot,
+		[out] IUnknown **ppUnkModeView);
+	HRESULT SetModeView(
+		[in] int iSlot,
+		[in] IUnknown *pUnkModeView);
+
+	// *piSlot == -1 : Not loaded
+	HRESULT GetIsStudyLoaded(
+		[in] LPCOLESTR pszNs,	// StudyId
+		[out] int *piSlot);
+	// *piSlot == -1 : Not loaded
+	HRESULT GetIsSeriesLoaded(
+		[in] LPCOLESTR pszNs,	// StudyId/SeriesId
+		[out] int *piSlot);
+	// *piSlot == -1 : Not loaded
+	HRESULT GetIsImageLoaded(
+		[in] LPCOLESTR pszNs,	// StudyId/SeriesId/ImageId
+		[out] int *piSlot);
+	// *piSlot == -1 : Not loaded
+	HRESULT GetIsItemLoaded(
+		[in] LPCOLESTR pszNs,	// StudyId/SeriesId/ImageId
+		[out] int *piSlot);
+	// S_OK: Loaded before; S_FALSE: Not reviewed before
+	HRESULT GetIsItemReviewed(
+		[in] LPCOLESTR pszNs);	// StudyId/SeriesId/ImageId
+
+	HRESULT ReleaseSlot([in] int iSlot);
+	
+	// Checks whether there was a active series (auto recovery)
+	HRESULT CheckActiveSeries(
+		[in] BOOL bReset,
+		[in, string] LPCOLESTR pszOperatorId,  // Optional
+		[out, string] LPOLESTR *ppszNs);  // Optional
+};
+
+[
+	object,
+	uuid(6C3188C6-371A-4e8c-A05A-B62511679435),
+	helpstring("IVsiSessionJournal Interface"),
+	pointer_default(unique)
+]
+interface IVsiSessionJournal : IUnknown
+{
+	// Records study operations - never change the #
+	typedef [v1_enum] enum
+	{
+		VSI_SESSION_EVENT_STUDY_NEW		= 1,
+		VSI_SESSION_EVENT_STUDY_OPEN	= 2,
+		VSI_SESSION_EVENT_STUDY_COMMIT	= 3,
+		VSI_SESSION_EVENT_STUDY_DISCARD	= 4,
+		VSI_SESSION_EVENT_SERIES_NEW	= 5,
+		VSI_SESSION_EVENT_SERIES_OPEN	= 6,
+		VSI_SESSION_EVENT_SERIES_CLOSE	= 7,
+		VSI_SESSION_EVENT_SERIES_DEL	= 8,
+		VSI_SESSION_EVENT_IMAGE_NEW		= 9,
+		VSI_SESSION_EVENT_IMAGE_OPEN	= 10,
+		VSI_SESSION_EVENT_IMAGE_RESAVE	= 11,
+		VSI_SESSION_EVENT_IMAGE_CLOSE	= 12,
+		VSI_SESSION_EVENT_IMAGE_DEL		= 13,
+	} VSI_SESSION_EVENT;
+
+	HRESULT Record(
+		[in] DWORD dwEvent,
+		[in] const VARIANT *pvParam1,
+		[in] const VARIANT *pvParam2);
+};
+
+
+[
+	object,
+	uuid(3D7C4D5E-D8BB-419E-9326-0668EDB4A515),
+	helpstring("IVsiStudyBrowser Interface"),
+	pointer_default(unique)
+]
+interface IVsiStudyBrowser : IUnknown
+{
+	HRESULT SetSelection([in, string] LPCOLESTR pszSelection);
+	HRESULT GetLastSelectedItem([in, out] VSI_DATA_LIST_TYPE *pType, [out] IUnknown **ppUnk);
+	HRESULT DeleteImage([in] IVsiImage *pImage);
+};
+
+
+[
+	object,
+	uuid(A2446A22-9E9E-4F49-AC11-5319C6AFC9E8),
+	helpstring("IVsiStudyInfo Interface"),
+	pointer_default(unique)
+]
+interface IVsiStudyInfo : IUnknown
+{
+	typedef [v1_enum] enum
+	{
+		VSI_SI_STATE_NONE						= 0x00000000,	// Error
+		VSI_SI_STATE_NEW_STUDY					= 0x00000001,	// New study
+		VSI_SI_STATE_NEW_SERIES					= 0x00000002,	// New series
+		VSI_SI_STATE_REVIEW						= 0x00000004,	// Review
+		VSI_SI_STATE_MASK						= 0x0000000F,	// Mask
+		VSI_SI_STATE_CLOSED						= 0x00000100,	// Series is closed
+	} VSI_SI_STATE;
+
+	HRESULT SetState([in] VSI_SI_STATE state);
+	HRESULT SetStudy([in] IVsiStudy *pStudy);
+	HRESULT SetSeries([in] IVsiSeries *pSeries);
+};
+
+
+[
+	object,
+	uuid(BFD3EC25-9885-42D8-A9F3-7610351125D0),
+	helpstring("IVsiDataListWnd Interface"),
+	pointer_default(unique),
+	local
+]
+interface IVsiDataListWnd : IUnknown
+{
+	typedef [v1_enum] enum
+	{
+		VSI_DATA_LIST_COL_NAME = 0,
+		VSI_DATA_LIST_COL_LOCKED = 1,
+		VSI_DATA_LIST_COL_DATE = 2,
+		VSI_DATA_LIST_COL_OWNER = 3,
+		VSI_DATA_LIST_COL_ACQ_BY = 4,
+		VSI_DATA_LIST_COL_MODE = 5,
+		VSI_DATA_LIST_COL_LENGTH = 6,
+		VSI_DATA_LIST_COL_SIZE = 7,
+		VSI_DATA_LIST_COL_ANIMAL_ID = 8,
+		VSI_DATA_LIST_COL_PROTOCOL_ID = 9,
+		VSI_DATA_LIST_COL_LAST,
+	} VSI_DATA_LIST_COL;
+
+	typedef [v1_enum] enum
+	{
+		VSI_DATA_LIST_FILTER_NONE						= 0x00000000,
+		VSI_DATA_LIST_FILTER_SELECT_PARENT				= 0x00000001,
+		VSI_DATA_LIST_FILTER_SELECT_CHILDREN			= 0x00000002,
+		VSI_DATA_LIST_FILTER_MOVE_TO_CHILDREN			= 0x00000004,
+		VSI_DATA_LIST_FILTER_SELECT_FOR_DELETE			= 0x00000008,
+		VSI_DATA_LIST_FILTER_SELECT_ALL_IMAGES			= 0x00000010,
+		VSI_DATA_LIST_FILTER_BASE_TYPE_MASK				= 0x000000FF,
+		VSI_DATA_LIST_FILTER_SKIP_ERRORS_AND_WARNINGS	= 0x00010000,
+	} VSI_DATA_LIST_FILTER;
+
+	cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(VSI_DATA_LIST_FILTER);")
+
+	typedef struct tagVSI_DATA_LIST_COLLECTION
+	{
+		DWORD dwFlags;  // VSI_DATA_LIST_FILTER
+		IVsiEnumStudy **ppEnumStudy;
+		int *piStudyCount;
+		IVsiEnumSeries **ppEnumSeries;
+		int *piSeriesCount;
+		IVsiEnumImage **ppEnumImage;
+		int *piImageCount;
+		IVsiSeries *pSeriesActive;
+	} VSI_DATA_LIST_COLLECTION;
+
+	typedef struct tagVSI_LVCOLUMN
+	{
+		UINT mask;
+		int fmt;
+		int cx;
+		DWORD dwTextId;
+		int iSubItem;
+		int iImage;
+		int iOrder;
+		BOOL bVisible;
+	} VSI_LVCOLUMN;
+
+	// Control notification code
+	typedef [v1_enum] enum
+	{
+		NM_VSI_DL_GET_ITEM_STATUS = (0U-400U),
+		NM_VSI_DL_SORT_CHANGED = (0U-401U),
+	} NM_VSI_DL;
+
+	typedef [v1_enum] enum
+	{
+		VSI_DATA_LIST_ITEM_STATUS_NORMAL		= 0x00000000,
+		VSI_DATA_LIST_ITEM_STATUS_HIDDEN		= 0x00000001,
+		VSI_DATA_LIST_ITEM_STATUS_ERROR			= 0x00000002,
+		VSI_DATA_LIST_ITEM_STATUS_WARNING		= 0x00000004,
+		VSI_DATA_LIST_ITEM_STATUS_ACTIVE_SINGLE	= 0x00000010,
+		VSI_DATA_LIST_ITEM_STATUS_ACTIVE_LEFT	= 0x00000020,
+		VSI_DATA_LIST_ITEM_STATUS_ACTIVE_RIGHT	= 0x00000040,
+		VSI_DATA_LIST_ITEM_STATUS_ACTIVE		= 0x00000080,
+		VSI_DATA_LIST_ITEM_STATUS_INACTIVE		= 0x00000100,
+		VSI_DATA_LIST_ITEM_STATUS_REVIEWED		= 0x00000200,
+	} VSI_DATA_LIST_ITEM_STATUS;
+
+	cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(VSI_DATA_LIST_ITEM_STATUS);")
+
+	// Control notification structure for NM_VSI_DL_GET_ITEM_STATUS
+	typedef struct tagNM_DL_ITEM
+	{
+		struct NMHDR
+		{
+			HWND      hwndFrom;
+			UINT_PTR  idFrom;
+			UINT      code;         // NM_ code
+		} hdr;
+
+		VSI_DATA_LIST_TYPE type;  // type
+		LPCWSTR pszItemPath;  // path to the item
+		IUnknown *pUnkItem; // IUnknown interface to the item
+	} NM_DL_ITEM;
+
+	typedef [v1_enum] enum
+	{
+		VSI_DATA_LIST_FLAG_KEEP_CHILDREN_ON_COLLAPSE	= 0x0001,
+		VSI_DATA_LIST_FLAG_ITEM_STATUS_CALLBACK			= 0x0002,
+		VSI_DATA_LIST_FLAG_NO_SESSION_LINK				= 0x0004,
+	} VSI_DATA_LIST_FLAG;
+
+	HRESULT Initialize(
+		[in] HWND hwnd,
+		[in] DWORD dwFlags,
+		[in] VSI_DATA_LIST_TYPE typeRoot,
+		[in] IVsiApp *pApp,
+		[in] const VSI_LVCOLUMN *pColumns,
+		[in] int iColumns);
+	HRESULT Uninitialize();
+	// S_OK - Lock acquired; S_FALSE - otherwise
+	HRESULT LockData();
+	HRESULT UnlockData();
+	HRESULT SetColumns(
+		[in] const VSI_LVCOLUMN *pColumns,
+		[in] int iColumns);
+	HRESULT SetTextColor(
+		[in] VSI_DATA_LIST_ITEM_STATUS dwState,
+		[in] COLORREF rgbState);
+	HRESULT SetFont(
+		[in] HFONT hfontNormal,
+		[in] HFONT hfontReviewed);
+	HRESULT SetEmptyMessage(
+		[in, string] LPCOLESTR pszMessage);
+	HRESULT GetSortSettings(
+		[in] VSI_DATA_LIST_TYPE type,
+		[out] VSI_DATA_LIST_COL *pCol,
+		[out] BOOL *pbDescending);
+	HRESULT SetSortSettings(
+		[in] VSI_DATA_LIST_TYPE type,
+		[in] VSI_DATA_LIST_COL col,
+		[in] BOOL bDescending);
+	HRESULT Clear();
+	HRESULT Fill([in] IUnknown *pUnkEnum, [in] int iLevelMax);
+	HRESULT Filter([in, string] LPCWSTR pszSearch, [in] BOOL *pbStop);
+	HRESULT GetItemCount([out] int *piCount);
+	HRESULT GetSelectedItem([out] int *piIndex);
+	HRESULT SetSelectedItem([in] int iIndex, [in] BOOL bEnsureVisible);
+	HRESULT SelectAll();
+	HRESULT GetSelection([in, out] VSI_DATA_LIST_COLLECTION *pSelection);
+	HRESULT SetSelection([in, string] LPCOLESTR pszNamespace, [in] BOOL bEnsureVisible);
+	HRESULT GetLastSelectedItem([in, out] VSI_DATA_LIST_TYPE *pType, [out] IUnknown **ppUnk);
+	HRESULT UpdateItem([in, string] LPCOLESTR pszNamespace, [in] BOOL bRecurChildren);
+	HRESULT UpdateItemStatus([in, unique, string] LPCOLESTR pszNamespace, [in] BOOL bRecurChildren);
+	HRESULT UpdateList([in] IXMLDOMDocument *pXmlDoc);
+	HRESULT GetItem(
+		[in] int iIndex,
+		[out] VSI_DATA_LIST_TYPE *pType,
+		[out] IUnknown **ppUnk);
+	HRESULT GetItemStatus(
+		[in, string] LPCOLESTR pszNamespace,
+		[out] VSI_DATA_LIST_ITEM_STATUS *pdwStatus);
+		
+	typedef [v1_enum] enum
+	{
+		VSI_DATA_LIST_SELECTION_CLEAR			= 0x00000001,
+		VSI_DATA_LIST_SELECTION_UPDATE			= 0x00000002,
+		VSI_DATA_LIST_SELECTION_ENSURE_VISIBLE	= 0x00000004,
+	} VSI_DATA_LIST_SELECTION;
+
+	HRESULT AddItem(
+		[in] IUnknown *pUnkItem,
+		[in] VSI_DATA_LIST_SELECTION dwSelect);
+	HRESULT RemoveItem(
+		[in] LPCOLESTR pszNamespace,
+		[in] VSI_DATA_LIST_SELECTION dwSelect);
+
+	cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(VSI_DATA_LIST_SELECTION);")
+
+	HRESULT GetItems([in, out] VSI_DATA_LIST_COLLECTION *pItems);
+};
+
+
+[
+	object,
+	uuid(600DC62A-107D-47A5-9A24-C2296A3FEBAE),
+	helpstring("IVsiChangeImageLabel Interface"),
+	pointer_default(unique),
+	local
+]
+interface IVsiChangeImageLabel : IUnknown
+{
+	HRESULT Activate(
+		[in] IVsiApp *pApp,
+		[in] HWND hwndParent,
+		[in] IUnknown *pUnkItem); // IVsiImage or IVsiModeData
+	HRESULT Deactivate();
+};
+
+
+[
+	object,
+	uuid(52E02A5F-C18B-4423-BF6D-BFD33A50F730),
+	dual,
+	nonextensible,
+	helpstring("IVsiMoveSeries Interface"),
+	pointer_default(unique)
+]
+interface IVsiMoveSeries : IUnknown
+{
+	HRESULT SetSeries([in] IVsiSeries *pSeries);
+};
+
+
+[
+	uuid(624D2124-248F-449C-9AF2-3F5CC258C1D5),
+	version(1.0),
+	helpstring("VsiStudyModule 1.0 Type Library")
+]
+library VsiStudyModuleLib
+{
+	importlib("stdole2.tlb");
+
+	[
+		uuid(7E1F3F11-745C-44C3-87E3-6EED6B7E196E),
+		helpstring("VsiStudy Class")
+	]
+	coclass VsiStudy
+	{
+		[default] interface IVsiStudy;
+	};
+
+	[
+		uuid(5D4320FA-589A-4C50-AF0C-C19ED3E02830),
+		helpstring("VsiImage Class")
+	]
+	coclass VsiImage
+	{
+		[default] interface IVsiImage;
+	};
+
+	[
+		uuid(743BE517-F9A6-42DB-8C9A-BD8CAF61A923),
+		helpstring("VsiSeries Class")
+	]
+	coclass VsiSeries
+	{
+		[default] interface IVsiSeries;
+	};
+
+	[
+		uuid(93FA460F-D8C9-4B94-97DF-69177C905603),
+		helpstring("VsiStudyManager Class")
+	]
+	coclass VsiStudyManager
+	{
+		[default] interface IVsiStudyManager;
+	};
+
+	[
+		uuid(15EE3188-5926-4CBA-ACD2-8622937D2BA2),
+		helpstring("VsiSession Class")
+	]
+	coclass VsiSession
+	{
+		[default] interface IVsiSession;
+	};
+
+	[
+		uuid(472269D8-5A9F-4719-A278-697470F04F9F),
+		helpstring("VsiStudyBrowser Class")
+	]
+	coclass VsiStudyBrowser
+	{
+		[default] interface IVsiStudyBrowser;
+	};
+
+	[
+		uuid(5D792541-44F1-4699-8560-0DAA59655339),
+		helpstring("VsiStudyInfo Class")
+	]
+	coclass VsiStudyInfo
+	{
+		[default] interface IVsiStudyInfo;
+	};
+
+	[
+		uuid(836E1FAF-4143-40DF-B71C-545CEB262340),
+		helpstring("VsiDataListWnd Class")
+	]
+	coclass VsiDataListWnd
+	{
+		[default] interface IVsiDataListWnd;
+	};
+
+	[
+		uuid(078C1D3A-15DE-4CCC-8D9B-152337CE7BAF),
+		helpstring("VsiChangeImageLabel Class")
+	]
+	coclass VsiChangeImageLabel
+	{
+		[default] interface IVsiChangeImageLabel;
+	};
+	[
+		uuid(3927A456-EF25-4724-AD32-C0B59A8A1EF7),
+		helpstring("VsiMoveSeries Class")
+	]
+	coclass VsiMoveSeries
+	{
+		[default] interface IVsiMoveSeries;
+	};
+};

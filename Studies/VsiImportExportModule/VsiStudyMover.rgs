@@ -1,0 +1,27 @@
+HKCR
+{
+	VsiVevo.StudyMover.1 = s 'VsiStudyMover Class'
+	{
+		CLSID = s '{A5ADE391-0D7B-4568-9B11-9CEF42F1B273}'
+	}
+	VsiVevo.StudyMover = s 'VsiStudyMover Class'
+	{
+		CLSID = s '{A5ADE391-0D7B-4568-9B11-9CEF42F1B273}'
+		CurVer = s 'VsiVevo.StudyMover.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {A5ADE391-0D7B-4568-9B11-9CEF42F1B273} = s 'VsiStudyMover Class'
+		{
+			ProgID = s 'VsiVevo.StudyMover.1'
+			VersionIndependentProgID = s 'VsiVevo.StudyMover'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{935BD427-0075-4F2C-B2D9-2ED885CF4DAC}'
+		}
+	}
+}

@@ -1,0 +1,26 @@
+HKCR
+{
+	VsiVevo.StudyBrowser.1 = s 'VsiStudyBrowser Class'
+	{
+		CLSID = s '{472269D8-5A9F-4719-A278-697470F04F9F}'
+	}
+	VsiVevo.StudyBrowser = s 'VsiStudyBrowser Class'
+	{
+		CLSID = s '{472269D8-5A9F-4719-A278-697470F04F9F}'
+		CurVer = s 'VsiVevo.StudyBrowser.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {472269D8-5A9F-4719-A278-697470F04F9F} = s 'VsiStudyBrowser Class'
+		{
+			ProgID = s 'VsiVevo.StudyBrowser.1'
+			VersionIndependentProgID = s 'VsiVevo.StudyBrowser'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{624D2124-248F-449C-9AF2-3F5CC258C1D5}'
+		}
+	}
+}

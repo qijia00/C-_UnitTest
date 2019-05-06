@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="Configuration.xsl"?>
+<configuration version="1.0">
+
+  <parameterTypes>
+    <parameterType name="boolean" progID="VsiVevo.ParameterBoolean"/>
+    <parameterType name="discrete" progID="VsiVevo.ParameterDiscrete"/>
+    <parameterType name="range" progID="VsiVevo.ParameterRange"/>
+    <parameterType name="bitfield" progID="VsiVevo.ParameterBitfield"/>
+  </parameterTypes>
+
+  <parameters subsys="System">
+    <parameter name="Operator" type="range">
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="string" default=""/>
+    </parameter>
+    <parameter name="Version-Software" type="range">
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="string"/>
+    </parameter>
+    <parameter name="Path-Settings" type="range">
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="string"/>
+    </parameter>
+    <parameter name="State" type="bitfield">
+      <flags>
+        <flag name="Global"/>
+      </flags>
+    </parameter>
+  </parameters>
+
+  <parameters subsys="General">
+    <parameter name="Operator-List-Update" type="boolean">
+      <flags>
+        <flag name="Event"/>
+      </flags>
+    </parameter>
+  </parameters>
+
+  <parameters subsys="Settings">
+    <parameter name="Version-Software" type="range">
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="string"/>
+    </parameter>
+    <parameter name="Version-Software-Current" type="range">
+      <flags>
+        <flag name="Global"/>
+      </flags>
+      <settings valueType="string"/>
+    </parameter>
+  </parameters>
+
+  <roots activeRoot="App">
+    <root name="App">
+      <groups>
+        <group name="Settings">
+          <inclusions>
+            <inclusion name="System"/>
+          </inclusions>
+        </group>
+        <group name="Events">
+          <inclusions>
+            <inclusion name="General"/>
+          </inclusions>
+        </group>
+      </groups>
+    </root>
+    <root name="Acq">
+      <groups>
+        <group name="Mode">
+          <inclusions>
+            <inclusion name="Settings"/>
+          </inclusions>
+        </group>
+      </groups>
+    </root>
+  </roots>
+
+</configuration>

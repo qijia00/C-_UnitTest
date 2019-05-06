@@ -1,0 +1,26 @@
+HKCR
+{
+	VsiVevo.StudyManager.1 = s 'VsiStudyManager Class'
+	{
+		CLSID = s '{93FA460F-D8C9-4B94-97DF-69177C905603}'
+	}
+	VsiVevo.StudyManager = s 'VsiStudyManager Class'
+	{
+		CLSID = s '{93FA460F-D8C9-4B94-97DF-69177C905603}'
+		CurVer = s 'VsiVevo.StudyManager.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {93FA460F-D8C9-4B94-97DF-69177C905603} = s 'VsiStudyManager Class'
+		{
+			ProgID = s 'VsiVevo.StudyManager.1'
+			VersionIndependentProgID = s 'VsiVevo.StudyManager'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{}'
+		}
+	}
+}

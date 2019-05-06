@@ -1,0 +1,97 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winres.h"
+#include "VsiBuildNumber.h"
+#define VSI_VER_FileDescription "Studies"
+#define VSI_VER_InternalName "VsiStudyModule.dll"
+#define VSI_VER_OriginalFilename "VsiStudyModule.dll"
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""winres.h""\r\n"
+    "#include ""VsiBuildNumber.h""\r\n"
+    "#define VSI_VER_FileDescription ""Studies""\r\n"
+    "#define VSI_VER_InternalName ""VsiStudyModule.dll""\r\n"
+    "#define VSI_VER_OriginalFilename ""VsiStudyModule.dll""\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#include ""VsiVersionDll.rc""\r\n"
+    "1 TYPELIB ""VsiStudyModule.tlb""\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// REGISTRY
+//
+
+IDR_VSISTUDYMODULE      REGISTRY                "VsiStudyModule.rgs"
+IDR_VSISTUDY            REGISTRY                "VsiStudy.rgs"
+IDR_VSISTUDYMANAGER     REGISTRY                "VsiStudyManager.rgs"
+IDR_VSISTUDYBROWSER     REGISTRY                "VsiStudyBrowser.rgs"
+IDR_VSISERIES           REGISTRY                "VsiSeries.rgs"
+IDR_VSIIMAGE            REGISTRY                "VsiImage.rgs"
+IDR_VSISTUDYINFO        REGISTRY                "VsiStudyInfo.rgs"
+IDR_VSISESSION          REGISTRY                "VsiSession.rgs"
+IDR_VSIDATALISTWND      REGISTRY                "VsiDataListWnd.rgs"
+IDR_VSICHANGEIMAGELABEL REGISTRY                "VsiChangeImageLabel.rgs"
+IDR_VSIMOVESERIES       REGISTRY                "VsiMoveSeries.rgs"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_PROJNAME            "VsiStudyModule"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#include "VsiVersionDll.rc"
+1 TYPELIB "VsiStudyModule.tlb"
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,0 +1,26 @@
+HKCR
+{
+	VsiVevo.Session.1 = s 'VsiSession Class'
+	{
+		CLSID = s '{15EE3188-5926-4CBA-ACD2-8622937D2BA2}'
+	}
+	VsiVevo.Session = s 'VsiSession Class'
+	{
+		CLSID = s '{15EE3188-5926-4CBA-ACD2-8622937D2BA2}'
+		CurVer = s 'VsiVevo.Session.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {15EE3188-5926-4CBA-ACD2-8622937D2BA2} = s 'VsiSession Class'
+		{
+			ProgID = s 'VsiVevo.Session.1'
+			VersionIndependentProgID = s 'VsiVevo.Session'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{624D2124-248F-449C-9AF2-3F5CC258C1D5}'
+		}
+	}
+}

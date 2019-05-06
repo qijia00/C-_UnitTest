@@ -1,0 +1,26 @@
+HKCR
+{
+	VsiVevo.Series.1 = s 'VsiSeries Class'
+	{
+		CLSID = s '{743BE517-F9A6-42DB-8C9A-BD8CAF61A923}'
+	}
+	VsiVevo.Series = s 'VsiSeries Class'
+	{
+		CLSID = s '{743BE517-F9A6-42DB-8C9A-BD8CAF61A923}'
+		CurVer = s 'VsiVevo.Series.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {743BE517-F9A6-42DB-8C9A-BD8CAF61A923} = s 'VsiSeries Class'
+		{
+			ProgID = s 'VsiVevo.Series.1'
+			VersionIndependentProgID = s 'VsiVevo.Series'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{624D2124-248F-449C-9AF2-3F5CC258C1D5}'
+		}
+	}
+}

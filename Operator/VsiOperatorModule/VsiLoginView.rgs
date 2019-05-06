@@ -1,0 +1,26 @@
+HKCR
+{
+	VsiVevo.Login.1 = s 'VsiLogin Class'
+	{
+		CLSID = s '{F70FE787-15EC-41AA-AB58-0A522E69448B}'
+	}
+	VsiVevo.Login = s 'VsiLogin Class'
+	{
+		CLSID = s '{F70FE787-15EC-41AA-AB58-0A522E69448B}'
+		CurVer = s 'VsiVevo.Login.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {F70FE787-15EC-41AA-AB58-0A522E69448B} = s 'VsiLogin Class'
+		{
+			ProgID = s 'VsiVevo.Login.1'
+			VersionIndependentProgID = s 'VsiVevo.Login'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{8000928C-ECFA-4BCE-A0BA-2D3691043FB4}'
+		}
+	}
+}

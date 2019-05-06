@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+  <file name="VsiOperatorModule.dll" hashalg="SHA1">
+    <comClass clsid="{31A555B5-3FE3-4230-89EA-AF654B623915}" tlbid="{8000928C-ECFA-4BCE-A0BA-2D3691043FB4}" description="VsiOperator Class" threadingModel="Both" progid="VsiVevo.Operator"></comClass>
+    <comClass clsid="{4F24351F-E3D6-4869-BE55-31D284CF42A1}" tlbid="{8000928C-ECFA-4BCE-A0BA-2D3691043FB4}" description="VsiOperatorManager Class" threadingModel="Both" progid="VsiVevo.OperatorManager"></comClass>
+    <comClass clsid="{1045E3C2-7606-46BE-8037-26BF471699C6}" tlbid="{8000928C-ECFA-4BCE-A0BA-2D3691043FB4}" description="VsiOperatorAdmin Class" threadingModel="Apartment" progid="VsiVevo.OperatorAdmin"></comClass>
+    <comClass clsid="{3D1E6BE0-2443-400E-9AE7-F03C2D243EC7}" tlbid="{8000928C-ECFA-4BCE-A0BA-2D3691043FB4}" description="VsiOperatorLogon Class" threadingModel="Apartment" progid="VsiVevo.OperatorLogon"></comClass>
+    <comClass clsid="{F70FE787-15EC-41AA-AB58-0A522E69448B}" tlbid="{8000928C-ECFA-4BCE-A0BA-2D3691043FB4}" description="VsiLoginView Class" threadingModel="Apartment" progid="VsiVevo.LoginView"></comClass>
+    <comClass clsid="{0A62584F-A0C8-48EA-83DF-D120B245A25D}" tlbid="{8000928C-ECFA-4BCE-A0BA-2D3691043FB4}" description="VsiOperatorExport Class" threadingModel="Apartment" progid="VsiVevo.OperatorExport"></comClass>
+    <comClass clsid="{4359C795-FB97-4195-8E36-999F8068A287}" tlbid="{8000928C-ECFA-4BCE-A0BA-2D3691043FB4}" description="VsiOperatorImport Class" threadingModel="Apartment" progid="VsiVevo.OperatorImport"></comClass>
+    <typelib tlbid="{8000928C-ECFA-4BCE-A0BA-2D3691043FB4}" version="1.0" helpdir="" flags="HASDISKIMAGE"></typelib>
+  </file>
+  <file name="VsiOperatorModule.dll">
+    <comClass
+      description="PSFactoryBuffer"
+      clsid="{5ED45EA5-5BD8-4169-8E01-CE6C3B46E860}"
+      threadingModel="Both"
+    />
+  </file>
+  <comInterfaceExternalProxyStub name="IVsiOperator" iid="{5ED45EA5-5BD8-4169-8E01-CE6C3B46E860}" tlbid="{8000928C-ECFA-4BCE-A0BA-2D3691043FB4}" proxyStubClsid32="{5ED45EA5-5BD8-4169-8E01-CE6C3B46E860}"></comInterfaceExternalProxyStub>
+  <comInterfaceExternalProxyStub name="IVsiPersistOperator" iid="{83B8D749-A6FD-458d-86D7-5EE7B5C0F8CC}" tlbid="{8000928C-ECFA-4BCE-A0BA-2D3691043FB4}" proxyStubClsid32="{5ED45EA5-5BD8-4169-8E01-CE6C3B46E860}"></comInterfaceExternalProxyStub>
+  <comInterfaceExternalProxyStub name="IVsiEnumOperator" iid="{51C94137-52B8-4230-841D-4AF25F39CA31}" tlbid="{8000928C-ECFA-4BCE-A0BA-2D3691043FB4}" proxyStubClsid32="{5ED45EA5-5BD8-4169-8E01-CE6C3B46E860}"></comInterfaceExternalProxyStub>
+  <comInterfaceExternalProxyStub name="IVsiOperatorManager" iid="{DE2B0822-E8E4-40AD-B35B-E6CD618B9800}" tlbid="{8000928C-ECFA-4BCE-A0BA-2D3691043FB4}" proxyStubClsid32="{5ED45EA5-5BD8-4169-8E01-CE6C3B46E860}"></comInterfaceExternalProxyStub>
+  <comInterfaceExternalProxyStub name="IVsiOperatorLogon" iid="{A9AE1276-F787-4BBA-A061-8A65236C80D9}" tlbid="{8000928C-ECFA-4BCE-A0BA-2D3691043FB4}" proxyStubClsid32="{5ED45EA5-5BD8-4169-8E01-CE6C3B46E860}"></comInterfaceExternalProxyStub>
+  <comInterfaceExternalProxyStub name="IVsiOperatorExport" iid="{DF3CE7B5-C5CD-41CD-878E-51D6457A61DE}" tlbid="{8000928C-ECFA-4BCE-A0BA-2D3691043FB4}" proxyStubClsid32="{5ED45EA5-5BD8-4169-8E01-CE6C3B46E860}"></comInterfaceExternalProxyStub>
+  <comInterfaceExternalProxyStub name="IVsiOperatorImport" iid="{A1B0353D-BB76-456F-9167-7C51CA9317F9}" tlbid="{8000928C-ECFA-4BCE-A0BA-2D3691043FB4}" proxyStubClsid32="{5ED45EA5-5BD8-4169-8E01-CE6C3B46E860}"></comInterfaceExternalProxyStub>
+</assembly>

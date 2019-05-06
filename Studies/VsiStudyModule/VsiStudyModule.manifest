@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+  <file name="VsiStudyModule.dll" hashalg="SHA1">
+    <comClass clsid="{15EE3188-5926-4CBA-ACD2-8622937D2BA2}" tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" description="VsiSession Class" threadingModel="Both" progid="VsiVevo.Session"></comClass>
+    <comClass clsid="{7E1F3F11-745C-44C3-87E3-6EED6B7E196E}" tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" description="VsiStudy Class" threadingModel="Both" progid="VsiVevo.Study"></comClass>
+    <comClass clsid="{743BE517-F9A6-42DB-8C9A-BD8CAF61A923}" tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" description="VsiSeries Class" threadingModel="Both" progid="VsiVevo.Series"></comClass>
+    <comClass clsid="{5D4320FA-589A-4C50-AF0C-C19ED3E02830}" tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" description="VsiImage Class" threadingModel="Both" progid="VsiVevo.Image"></comClass>
+    <comClass clsid="{93FA460F-D8C9-4B94-97DF-69177C905603}" tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" description="VsiStudyManager Class" threadingModel="Both" progid="VsiVevo.StudyManager"></comClass>
+    <comClass clsid="{472269D8-5A9F-4719-A278-697470F04F9F}" tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" description="VsiStudyBrowser Class" threadingModel="Apartment" progid="VsiVevo.StudyBrowser"></comClass>
+    <comClass clsid="{5D792541-44F1-4699-8560-0DAA59655339}" tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" description="VsiStudyInfo Class" threadingModel="Apartment" progid="VsiVevo.StudyInfo"></comClass>
+    <comClass clsid="{15EE3188-5926-4CBA-ACD2-8622937D2BA2}" tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" description="VsiSession Class" threadingModel="Both" progid="VsiVevo.Session"></comClass>
+    <comClass clsid="{836E1FAF-4143-40DF-B71C-545CEB262340}" tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" description="VsiDataListWnd Class" threadingModel="Apartment" progid="VsiVevo.DataListWnd"></comClass>    
+    <comClass clsid="{078C1D3A-15DE-4CCC-8D9B-152337CE7BAF}" tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" description="VsiChangeImageLabel Class" threadingModel="Apartment" progid="VsiVevo.ChangeImageLabel"></comClass>    
+    <comClass clsid="{3927A456-EF25-4724-AD32-C0B59A8A1EF7}" tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" description="VsiMoveSeries Class" threadingModel="Apartment" progid="VsiVevo.MoveSeries"></comClass>
+    <typelib tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" version="1.0" helpdir="" flags="HASDISKIMAGE"></typelib>
+  </file>
+  <file name="VsiStudyModule.dll">
+    <comClass
+			description="PSFactoryBuffer"
+			clsid="{96F12A86-E5EA-44BC-BEDB-C04D80640696}"
+			threadingModel="Both"
+		/>
+  </file>
+  <comInterfaceExternalProxyStub name="IVsiImage" iid="{96F12A86-E5EA-44BC-BEDB-C04D80640696}" tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" proxyStubClsid32="{96F12A86-E5EA-44BC-BEDB-C04D80640696}"></comInterfaceExternalProxyStub>
+  <comInterfaceExternalProxyStub name="IVsiSession" iid="{A191A897-EEA1-46d8-A9C0-4D433C406961}" tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" proxyStubClsid32="{96F12A86-E5EA-44BC-BEDB-C04D80640696}"></comInterfaceExternalProxyStub>
+  <comInterfaceExternalProxyStub name="IVsiSessionJournal" iid="{6C3188C6-371A-4e8c-A05A-B62511679435}" tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" proxyStubClsid32="{96F12A86-E5EA-44BC-BEDB-C04D80640696}"></comInterfaceExternalProxyStub>
+  <comInterfaceExternalProxyStub name="IVsiStudy" iid="{564FC61F-930F-46E8-AA4C-3CE8F345E8E7}" tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" proxyStubClsid32="{96F12A86-E5EA-44BC-BEDB-C04D80640696}"></comInterfaceExternalProxyStub>
+  <comInterfaceExternalProxyStub name="IVsiPersistStudy" iid="{D7B75D96-D9D0-40c7-9FB8-A620951D6CBC}" tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" proxyStubClsid32="{96F12A86-E5EA-44BC-BEDB-C04D80640696}"></comInterfaceExternalProxyStub>
+  <comInterfaceExternalProxyStub name="IVsiEnumStudy" iid="{D542B6C9-7785-4a19-A689-DCEA3855CA17}" tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" proxyStubClsid32="{96F12A86-E5EA-44BC-BEDB-C04D80640696}"></comInterfaceExternalProxyStub>
+  <comInterfaceExternalProxyStub name="IVsiSeries" iid="{D8BF41A7-C7A2-48B5-BAE6-FA3B639A329E}" tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" proxyStubClsid32="{96F12A86-E5EA-44BC-BEDB-C04D80640696}"></comInterfaceExternalProxyStub>
+  <comInterfaceExternalProxyStub name="IVsiPersistSeries" iid="{2AA2376C-F55D-497e-90D0-D18B8BFF0D76}" tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" proxyStubClsid32="{96F12A86-E5EA-44BC-BEDB-C04D80640696}"></comInterfaceExternalProxyStub>
+  <comInterfaceExternalProxyStub name="IVsiEnumSeries" iid="{3B236BC5-ABF4-4210-BEE1-1817D333342B}" tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" proxyStubClsid32="{96F12A86-E5EA-44BC-BEDB-C04D80640696}"></comInterfaceExternalProxyStub>
+  <comInterfaceExternalProxyStub name="IVsiPersistImage" iid="{82D6A268-2710-4538-B86D-464F7FEF0ACE}" tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" proxyStubClsid32="{96F12A86-E5EA-44BC-BEDB-C04D80640696}"></comInterfaceExternalProxyStub>
+  <comInterfaceExternalProxyStub name="IVsiEnumImage" iid="{8074C4BC-BC72-47fb-85D5-9396922B375B}" tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" proxyStubClsid32="{96F12A86-E5EA-44BC-BEDB-C04D80640696}"></comInterfaceExternalProxyStub>
+  <comInterfaceExternalProxyStub name="IVsiStudyManager" iid="{111DFA6E-6010-4B03-9522-F1A2DED48117}" tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" proxyStubClsid32="{96F12A86-E5EA-44BC-BEDB-C04D80640696}"></comInterfaceExternalProxyStub>
+  <comInterfaceExternalProxyStub name="IVsiStudyBrowser" iid="{3D7C4D5E-D8BB-419E-9326-0668EDB4A515}" tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" proxyStubClsid32="{96F12A86-E5EA-44BC-BEDB-C04D80640696}"></comInterfaceExternalProxyStub>
+  <comInterfaceExternalProxyStub name="IVsiSession" iid="{A191A897-EEA1-46d8-A9C0-4D433C406961}" tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" proxyStubClsid32="{96F12A86-E5EA-44BC-BEDB-C04D80640696}"></comInterfaceExternalProxyStub>
+  <comInterfaceExternalProxyStub name="IVsiDataListWnd" iid="{BFD3EC25-9885-42D8-A9F3-7610351125D0}" tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" proxyStubClsid32="{96F12A86-E5EA-44BC-BEDB-C04D80640696}"></comInterfaceExternalProxyStub>  
+  <comInterfaceExternalProxyStub name="IVsiStudyInfo" iid="{A2446A22-9E9E-4F49-AC11-5319C6AFC9E8}" tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" proxyStubClsid32="{96F12A86-E5EA-44BC-BEDB-C04D80640696}"></comInterfaceExternalProxyStub>
+  <comInterfaceExternalProxyStub name="IVsiCopyFromStudyListWnd" iid="{EEC4A0CD-5967-4c96-ABC0-520D0CE735D4}" tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" proxyStubClsid32="{96F12A86-E5EA-44BC-BEDB-C04D80640696}"></comInterfaceExternalProxyStub>
+  <comInterfaceExternalProxyStub name="IVsiChangeImageLabel" iid="{600DC62A-107D-47A5-9A24-C2296A3FEBAE}" tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" proxyStubClsid32="{96F12A86-E5EA-44BC-BEDB-C04D80640696}"></comInterfaceExternalProxyStub>
+  <comInterfaceExternalProxyStub name="IVsiMoveSeries" iid="{52E02A5F-C18B-4423-BF6D-BFD33A50F730}" tlbid="{624D2124-248F-449C-9AF2-3F5CC258C1D5}" proxyStubClsid32="{96F12A86-E5EA-44BC-BEDB-C04D80640696}"></comInterfaceExternalProxyStub>
+</assembly>

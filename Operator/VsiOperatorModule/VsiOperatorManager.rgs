@@ -1,0 +1,26 @@
+HKCR
+{
+	VsiVevo.OperatorManager.1 = s 'VsiOperatorManager Class'
+	{
+		CLSID = s '{4F24351F-E3D6-4869-BE55-31D284CF42A1}'
+	}
+	VsiVevo.OperatorManager = s 'VsiOperatorManager Class'
+	{
+		CLSID = s '{4F24351F-E3D6-4869-BE55-31D284CF42A1}'
+		CurVer = s 'VsiVevo.OperatorManager.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {4F24351F-E3D6-4869-BE55-31D284CF42A1} = s 'VsiOperatorManager Class'
+		{
+			ProgID = s 'VsiVevo.OperatorManager.1'
+			VersionIndependentProgID = s 'VsiVevo.OperatorManager'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{8000928C-ECFA-4BCE-A0BA-2D3691043FB4}'
+		}
+	}
+}

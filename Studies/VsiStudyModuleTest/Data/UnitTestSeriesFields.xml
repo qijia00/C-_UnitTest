@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fields version="1.0">
+  <field name="c1" label="Anesthetic Type"/>
+  <field name="c2" label="Anesthetic On"/>
+  <field name="c3" label="Anesthetic Off"/>
+  <field name="c4" label="Protocol ID"/>
+  <field name="c5" label="Protocol Name"/>
+  <field name="c6" label="Injectable"/>
+  <field name="c7" label="Injection Site"/>
+  <field name="c8" label="Injection Amount"/>
+</fields>

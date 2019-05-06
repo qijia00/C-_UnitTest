@@ -1,0 +1,25 @@
+HKCR
+{
+	VsiVevo.GifAnimate.1 = s 'VsiGifAnimate Class'
+	{
+		CLSID = s '{21036CE6-5955-44C1-9938-9E5842D28349}'
+	}
+	VsiVevo.GifAnimate = s 'VsiGifAnimate Class'
+	{
+		CLSID = s '{21036CE6-5955-44C1-9938-9E5842D28349}'
+		CurVer = s 'VsiVevo.GifAnimate.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {21036CE6-5955-44C1-9938-9E5842D28349} = s 'VsiGifAnimate Class'
+		{
+			ProgID = s 'VsiVevo.GifAnimate.1'
+			VersionIndependentProgID = s 'VsiVevo.GifAnimate'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			'TypeLib' = s '{935BD427-0075-4F2C-B2D9-2ED885CF4DAC}'
+		}
+	}
+}

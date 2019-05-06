@@ -1,0 +1,26 @@
+HKCR
+{
+	VsiVevo.StudyInfo.1 = s 'VsiStudyInfo Class'
+	{
+		CLSID = s '{5D792541-44F1-4699-8560-0DAA59655339}'
+	}
+	VsiVevo.StudyInfo = s 'VsiStudyInfo Class'
+	{
+		CLSID = s '{5D792541-44F1-4699-8560-0DAA59655339}'
+		CurVer = s 'VsiVevo.StudyInfo.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {5D792541-44F1-4699-8560-0DAA59655339} = s 'VsiStudyInfo Class'
+		{
+			ProgID = s 'VsiVevo.StudyInfo.1'
+			VersionIndependentProgID = s 'VsiVevo.StudyInfo'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{624D2124-248F-449C-9AF2-3F5CC258C1D5}'
+		}
+	}
+}

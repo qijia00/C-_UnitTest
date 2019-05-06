@@ -1,0 +1,26 @@
+HKCR
+{
+	VsiVevo.Image.1 = s 'VsiImage Class'
+	{
+		CLSID = s '{5D4320FA-589A-4C50-AF0C-C19ED3E02830}'
+	}
+	VsiVevo.Image = s 'VsiImage Class'
+	{
+		CLSID = s '{5D4320FA-589A-4C50-AF0C-C19ED3E02830}'
+		CurVer = s 'VsiVevo.Image.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {5D4320FA-589A-4C50-AF0C-C19ED3E02830} = s 'VsiImage Class'
+		{
+			ProgID = s 'VsiVevo.Image.1'
+			VersionIndependentProgID = s 'VsiVevo.Image'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Both'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{624D2124-248F-449C-9AF2-3F5CC258C1D5}'
+		}
+	}
+}

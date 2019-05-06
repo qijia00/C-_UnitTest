@@ -1,0 +1,11 @@
+HKCR
+{
+	NoRemove AppID
+	{
+		'%APPID%' = s 'VsiOperatorModule'
+		'VsiOperatorModule.DLL'
+		{
+			val AppID = s '%APPID%'
+		}
+	}
+}

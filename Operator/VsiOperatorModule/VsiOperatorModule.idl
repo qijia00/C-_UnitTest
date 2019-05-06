@@ -1,0 +1,363 @@
+/*******************************************************************************
+**
+**  Copyright (c) 1999-2012 VisualSonics Inc. All Rights Reserved.
+**
+**  VsiOperatorModule.idl
+**
+**	Description:
+**		IDL source for VsiOperatorModule
+**
+********************************************************************************/
+
+// This file will be processed by the MIDL tool to
+// produce the type library (VsiOperatorModule.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+import "VsiAppModule.idl";
+import "VsiAppViewModule.idl";
+
+
+// Fields length
+typedef [v1_enum] enum
+{
+	VSI_OPERATOR_NAME_MAX = 40,
+	VSI_OPERATOR_PASSWORD_MAX = 40
+} VSI_OPERATOR_MAX;
+
+// Properties
+typedef [v1_enum] enum
+{
+	VSI_OPERATOR_PROP_NONE = 0,
+	VSI_OPERATOR_PROP_ID,
+	VSI_OPERATOR_PROP_NAME,
+} VSI_OPERATOR_PROP;
+
+// Servicing operator ID
+cpp_quote("#define VSI_OPERATOR_ID_SERVICE_MODE	L\"0\"")
+
+// Type
+// !!! Persist to XML, DON'T change the #
+typedef [v1_enum] enum
+{
+	VSI_OPERATOR_TYPE_NONE					= 0x00000000,	// None
+	VSI_OPERATOR_TYPE_STANDARD				= 0x00000001,	// Standard
+	VSI_OPERATOR_TYPE_ADMIN					= 0x00000002,	// Administrator
+	VSI_OPERATOR_TYPE_BASE_MASK				= 0x0000000F,	// Mask for base types
+	VSI_OPERATOR_TYPE_SERVICE_MODE			= 0x10000000,	// Service Mode
+	VSI_OPERATOR_TYPE_PASSWORD_MANDATRORY	= 0x20000000,	// password filter
+} VSI_OPERATOR_TYPE;
+
+cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(VSI_OPERATOR_TYPE);")
+
+[
+	object,
+	uuid(5ED45EA5-5BD8-4169-8E01-CE6C3B46E860),
+	helpstring("IVsiOperator Interface"),
+	pointer_default(unique)
+]
+interface IVsiOperator : IUnknown
+{
+	HRESULT GetId([out, string] LPOLESTR *ppszId);
+	HRESULT SetId([in, string] LPCOLESTR pszId);
+
+	HRESULT GetName([out, string] LPOLESTR *ppszName);
+	HRESULT SetName([in, string] LPCOLESTR pszName);
+
+	HRESULT GetPassword([out, string] LPOLESTR *ppszPassword);
+	HRESULT SetPassword([in, string] LPCOLESTR pszPassword, [in] BOOL bHashed);
+	HRESULT TestPassword([in, string] LPCOLESTR pszPassword);  // S_OK - Passed; S_FALSE - Failed
+	HRESULT HasPassword();
+
+	HRESULT GetGroup([out, string] LPOLESTR *ppszGroup);
+	HRESULT SetGroup([in, string] LPCOLESTR pszGroup);
+
+	HRESULT GetType([out] VSI_OPERATOR_TYPE *pdwType);
+	HRESULT SetType([in] VSI_OPERATOR_TYPE dwType);
+
+	// !!! Persist to XML, DON'T change the #
+	typedef [v1_enum] enum
+	{
+		VSI_OPERATOR_STATE_ENABLE  			= 0x00000000,	// Enable
+		VSI_OPERATOR_STATE_DISABLE			= 0x00000001,	// Disable
+		VSI_OPERATOR_STATE_DISABLE_SESSION	= 0x00000002,	// Disable in this application session
+	} VSI_OPERATOR_STATE;
+
+	HRESULT GetState([out] VSI_OPERATOR_STATE *pdwState);
+	HRESULT SetState([in] VSI_OPERATOR_STATE dwState);
+
+	// !!! Persist to XML, DON'T change the #
+	typedef [v1_enum] enum
+	{
+		VSI_OPERATOR_DEFAULT_STUDY_ACCESS_NONE			= 0x00000000,	// None
+		VSI_OPERATOR_DEFAULT_STUDY_ACCESS_PRIVATE		= 0x00000001,	// Private
+		VSI_OPERATOR_DEFAULT_STUDY_ACCESS_GROUP			= 0x00000002,	// Group
+		VSI_OPERATOR_DEFAULT_STUDY_ACCESS_PUBLIC		= 0x00000004,	// Public
+	} VSI_OPERATOR_DEFAULT_STUDY_ACCESS;
+
+	HRESULT GetDefaultStudyAccess([out] VSI_OPERATOR_DEFAULT_STUDY_ACCESS *pdwState);
+	HRESULT SetDefaultStudyAccess([in] VSI_OPERATOR_DEFAULT_STUDY_ACCESS dwState);
+
+	typedef struct tagVSI_OPERATOR_SESSION_INFO
+	{
+		SYSTEMTIME stLastLogin;
+		SYSTEMTIME stLastLogout;
+		DWORD dwTotalSeconds;
+	} VSI_OPERATOR_SESSION_INFO;
+
+	HRESULT GetSessionInfo([out] VSI_OPERATOR_SESSION_INFO *pInfo);
+	HRESULT SetSessionInfo([in] const VSI_OPERATOR_SESSION_INFO *pInfo);
+};
+
+
+[
+	object,
+	uuid(83B8D749-A6FD-458d-86D7-5EE7B5C0F8CC),
+	helpstring("IVsiPersistOperator Interface"),
+	pointer_default(unique)
+]
+interface IVsiPersistOperator : IUnknown
+{
+	HRESULT LoadXml([in] IXMLDOMNode* pXmlNode);
+	HRESULT SaveXml([in] IXMLDOMNode* pXmlNode);
+	HRESULT SaveSax([in] IUnknown* pUnkISAXContentHandler);
+};
+
+
+[
+	uuid(51C94137-52B8-4230-841D-4AF25F39CA31),
+	helpstring("IVsiEnumOperator Interface"),
+	pointer_default(unique),
+]
+interface IVsiEnumOperator : IUnknown
+{
+	HRESULT Next(
+		[in] ULONG celt,
+		[out, size_is(celt), length_is(*pCeltFetched)] IVsiOperator **rgelt,
+		[out] ULONG* pCeltFetched);
+	HRESULT Skip([in] ULONG celt);
+	HRESULT Reset();
+	HRESULT Clone([out] IVsiEnumOperator **ppEnum);
+};
+
+
+[
+	object,
+	uuid(DE2B0822-E8E4-40AD-B35B-E6CD618B9800),
+	helpstring("IVsiOperatorManager Interface"),
+	pointer_default(unique)
+]
+interface IVsiOperatorManager : IUnknown
+{
+	HRESULT Initialize(
+		[in] IVsiApp *pApp,
+		[in, string] LPCOLESTR pszDefaultDataFile);
+	HRESULT Uninitialize();
+
+	HRESULT GetOperatorDataPath(
+		[in] VSI_OPERATOR_PROP prop,
+		[in, string] LPCOLESTR pszProp,
+		[out, string] LPOLESTR *ppszPath);
+
+	typedef [v1_enum] enum
+	{
+		VSI_OPERATOR_FILTER_TYPE_NONE			= 0x00000000,	// None
+		VSI_OPERATOR_FILTER_TYPE_STANDARD		= 0x00000001,	// Standard
+		VSI_OPERATOR_FILTER_TYPE_ADMIN			= 0x00000002,	// Administrator (not including service mode account)
+		VSI_OPERATOR_FILTER_TYPE_PASSWORD		= 0x00000004,	// Password
+		VSI_OPERATOR_FILTER_TYPE_NO_PASSWORD	= 0x00000008,	// No Password
+		VSI_OPERATOR_FILTER_TYPE_SERVICE_MODE	= 0x00000010,	// Include service mode account
+	} VSI_OPERATOR_FILTER_TYPE;
+
+	cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(VSI_OPERATOR_FILTER_TYPE);")
+
+	HRESULT GetOperators(
+		[in] VSI_OPERATOR_FILTER_TYPE types,
+		[out] IVsiEnumOperator **ppEnum);
+	HRESULT GetOperator(
+		[in] VSI_OPERATOR_PROP prop,
+		[in, string] LPCOLESTR pszProp,
+		[out] IVsiOperator **ppOperator);
+	HRESULT GetCurrentOperator([out] IVsiOperator **ppOperator);
+	HRESULT SetCurrentOperator([in, string] LPCOLESTR pszId);
+	HRESULT GetCurrentOperatorDataPath([out, string] LPOLESTR *ppszPath);
+
+	typedef [v1_enum] enum
+	{
+		VSI_OPERATOR_RELATIONSHIP_UNKNOWN		= 0x00000000,
+		VSI_OPERATOR_RELATIONSHIP_NONE			= 0x00000001,
+		VSI_OPERATOR_RELATIONSHIP_SAME			= 0x00000002,
+		VSI_OPERATOR_RELATIONSHIP_SAME_GROUP	= 0x00000003,
+	} VSI_OPERATOR_RELATIONSHIP;
+
+	HRESULT GetRelationshipWithCurrentOperator(
+		[in] VSI_OPERATOR_PROP prop,
+		[in, string] LPCOLESTR pszProp,
+		[out] VSI_OPERATOR_RELATIONSHIP *pRelationship);
+
+	HRESULT AddOperator(
+		[in] IVsiOperator *pOperator,
+		[in, string] LPCOLESTR pszIdCloneSettingsFrom);
+	HRESULT RemoveOperator([in, string] LPCOLESTR pszId);
+	HRESULT OperatorModified();
+
+	HRESULT GetOperatorCount(
+		[in] VSI_OPERATOR_FILTER_TYPE filters,
+		[out] DWORD *pdwCount);
+
+	HRESULT SetIsAuthenticated(
+		[in, string] LPCOLESTR pszId,
+		[in] BOOL bAuthenticated);
+
+	HRESULT GetIsAuthenticated([in, string] LPCOLESTR pszId, [out] BOOL *pbAuthenticated);
+	HRESULT ClearAuthenticatedList();
+	HRESULT GetIsAdminAuthenticated([out] BOOL *pbAuthenticated);
+};
+
+
+[
+	object,
+	uuid(0F5A86A3-525F-4e74-B2AC-6D5048A7A5EB),
+	helpstring("IVsiPersistOperatorManager Interface"),
+	pointer_default(unique)
+]
+interface IVsiPersistOperatorManager : IUnknown
+{
+	HRESULT IsDirty();  // S_OK - Dirty; S_FALSE - Not dirty
+	// pszDataFile - NULL, use default (pszDefaultDataFile)
+	HRESULT LoadOperator([in, string] LPCOLESTR pszDataFile);
+	// pszDataFile - NULL, use default (pszDefaultDataFile)
+	HRESULT SaveOperator([in, string] LPCOLESTR pszDataFile);
+};
+
+
+[
+	object,
+	uuid(679E44DC-77D7-4C28-9E39-0D88BB33A5C0),
+	helpstring("IVsiOperatorAdmin Interface"),
+	pointer_default(unique)
+]
+interface IVsiOperatorAdmin : IUnknown
+{
+};
+
+
+[
+	object,
+	uuid(A9AE1276-F787-4BBA-A061-8A65236C80D9),
+	helpstring("IVsiOperatorLogon Interface"),
+	pointer_default(unique)
+]
+interface IVsiOperatorLogon : IUnknown
+{
+	HRESULT Activate(
+		[in] IVsiApp *pApp,
+		[in] HWND hwndParent,
+		[in] LPCOLESTR pszTitle,
+		[in] LPCOLESTR pszMsg,
+		[in] VSI_OPERATOR_TYPE dwType,
+		[in] BOOL bUpdateCurrentOperator,
+		[in, out] IVsiOperator **ppOperator);
+};
+
+
+[
+	object,
+	uuid(DF3CE7B5-C5CD-41CD-878E-51D6457A61DE),
+	helpstring("IVsiOperatorExport Interface"),
+	pointer_default(unique)
+]
+interface IVsiOperatorExport : IUnknown
+{
+	HRESULT Initialize([in] IUnknown *pPropBag);
+};
+
+
+[
+	object,
+	uuid(A1B0353D-BB76-456F-9167-7C51CA9317F9),
+	helpstring("IVsiOperatorImport Interface"),
+	pointer_default(unique)
+]
+interface IVsiOperatorImport : IUnknown
+{
+	HRESULT Initialize([in] IUnknown *pPropBag);
+};
+
+
+[
+	uuid(8000928C-ECFA-4BCE-A0BA-2D3691043FB4),
+	version(1.0),
+	helpstring("VsiOperatorModule 1.0 Type Library")
+]
+library VsiOperatorModuleLib
+{
+	importlib("stdole2.tlb");
+
+	[
+		uuid(31A555B5-3FE3-4230-89EA-AF654B623915),
+		helpstring("VsiOperator Class")
+	]
+	coclass VsiOperator
+	{
+		[default] interface IVsiOperator;
+		interface IVsiPersistOperator;
+	};
+
+	[
+		uuid(4F24351F-E3D6-4869-BE55-31D284CF42A1),
+		helpstring("VsiOperatorManager Class")
+	]
+	coclass VsiOperatorManager
+	{
+		[default] interface IVsiOperatorManager;
+		interface IVsiPersistOperatorManager;
+	};
+
+	[
+		uuid(1045E3C2-7606-46BE-8037-26BF471699C6),
+		helpstring("VsiOperatorAdmin Class")
+	]
+	coclass VsiOperatorAdmin
+	{
+		[default] interface IVsiOperatorAdmin;
+	};
+
+	[
+		uuid(3D1E6BE0-2443-400E-9AE7-F03C2D243EC7),
+		helpstring("VsiOperatorLogon Class")
+	]
+	coclass VsiOperatorLogon
+	{
+		[default] interface IVsiOperatorLogon;
+	};
+
+	[
+		uuid(F70FE787-15EC-41AA-AB58-0A522E69448B),
+		helpstring("VsiLoginView Class")
+	]
+	coclass VsiLoginView
+	{
+		[default] interface IVsiView;
+	};
+
+	[
+		uuid(0A62584F-A0C8-48EA-83DF-D120B245A25D),
+		helpstring("VsiOperatorExport Class")
+	]
+	coclass VsiOperatorExport
+	{
+		[default] interface IVsiView;
+		interface IVsiOperatorExport;
+	};
+
+	[
+		uuid(4359C795-FB97-4195-8E36-999F8068A287),
+		helpstring("VsiOperatorImport Class")
+	]
+	coclass VsiOperatorImport
+	{
+		[default] interface IVsiView;
+		interface IVsiOperatorImport;
+	};
+};

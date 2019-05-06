@@ -1,0 +1,26 @@
+HKCR
+{
+	VsiVevo.MoveSeries.1 = s 'VsiMoveSeries Class'
+	{
+		CLSID = s '{3927A456-EF25-4724-AD32-C0B59A8A1EF7}'
+	}
+	VsiVevo.MoveSeries = s 'VsiMoveSeries Class'
+	{
+		CLSID = s '{3927A456-EF25-4724-AD32-C0B59A8A1EF7}'
+		CurVer = s 'VsiVevo.MoveSeries.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {3927A456-EF25-4724-AD32-C0B59A8A1EF7} = s 'VsiMoveSeries Class'
+		{
+			ProgID = s 'VsiVevo.MoveSeries.1'
+			VersionIndependentProgID = s 'VsiVevo.MoveSeries'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{624D2124-248F-449C-9AF2-3F5CC258C1D5}'
+		}
+	}
+}

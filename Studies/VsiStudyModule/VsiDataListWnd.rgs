@@ -1,0 +1,26 @@
+HKCR
+{
+	VsiVevo.DataListWnd.1 = s 'VsiDataListWnd Class'
+	{
+		CLSID = s '{836E1FAF-4143-40DF-B71C-545CEB262340}'
+	}
+	VsiVevo.DataListWnd = s 'VsiDataListWnd Class'
+	{
+		CLSID = s '{836E1FAF-4143-40DF-B71C-545CEB262340}'
+		CurVer = s 'VsiVevo.DataListWnd.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {836E1FAF-4143-40DF-B71C-545CEB262340} = s 'VsiDataListWnd Class'
+		{
+			ProgID = s 'VsiVevo.DataListWnd.1'
+			VersionIndependentProgID = s 'VsiVevo.DataListWnd'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{624D2124-248F-449C-9AF2-3F5CC258C1D5}'
+		}
+	}
+}

@@ -1,0 +1,282 @@
+/*******************************************************************************
+**
+**  Copyright (c) 1999-2012 VisualSonics Inc. All Rights Reserved.
+**
+**  VsiImportExportModule.idl
+**
+**	Description:
+**		IDL source for VsiImportExportModule
+**
+********************************************************************************/
+
+// This file will be processed by the MIDL tool to
+// produce the type library (VsiImportExportModule.tlb) and marshalling code.
+
+
+import "oaidl.idl";
+// import "ocidl.idl";
+
+// SCODE
+cpp_quote("#define VSI_EXPORT_S_CODE(x) MAKE_SCODE(SEVERITY_SUCCESS, FACILITY_ITF, (x) + 0x7000)")
+cpp_quote("#define VSI_EXPORT_E_CODE(x) MAKE_SCODE(SEVERITY_ERROR, FACILITY_ITF, (x) + 0x7000)")
+
+cpp_quote("#define S_VSI_EXPORT_CANCEL		VSI_EXPORT_S_CODE(1)")
+cpp_quote("#define S_VSI_EXPORT_FILE_TOO_LARGE		VSI_EXPORT_E_CODE(1)")
+
+// Views
+cpp_quote("#define VSI_VIEW_EXPORT_IMAGE L\"ExportImage\"")
+cpp_quote("#define VSI_VIEW_COPY_STUDY_TO L\"CopyStudyTo\"")
+cpp_quote("#define VSI_VIEW_COPY_STUDY_FROM L\"CopyStudyFrom\"")
+cpp_quote("#define VSI_VIEW_BURN_DISC L\"BurnDisc\"")
+
+cpp_quote("#define VSI_EXPORT_PROP_IMAGE		L\"image\"")
+cpp_quote("#define VSI_EXPORT_PROP_PROGRESS		L\"progress\"")
+cpp_quote("#define VSI_EXPORT_PROP_RETURN		L\"return\"")
+cpp_quote("#define VSI_EXPORT_PROP_REPORT		L\"report\"")
+cpp_quote("#define VSI_EXPORT_PROP_VEVOSTR		L\"vevoStr\"")
+cpp_quote("#define VSI_EXPORT_PROP_VEVOCQ		L\"vevoCQ\"")
+cpp_quote("#define VSI_EXPORT_PROP_REGIONS		L\"regions\"")
+cpp_quote("#define VSI_EXPORT_PROP_UPDATE_ONLY	L\"updateOnly\"")
+
+
+typedef [v1_enum] enum
+{
+	VSI_IMAGE_TIFF_FULL							= 0x00000001,
+	VSI_IMAGE_BMP_FULL							= 0x00000002,
+	VSI_IMAGE_TIFF_IMAGE						= 0x00000004,
+	VSI_IMAGE_BMP_IMAGE							= 0x00000008,
+	VSI_IMAGE_AVI_UNCOMP						= 0x00000010,
+	VSI_IMAGE_AVI_VIDEO1						= 0x00000020,
+	VSI_IMAGE_AVI_MSMEDIAVIDEO9					= 0x00000040,
+	VSI_IMAGE_AVI_CUSTOM						= 0x00000080,
+	VSI_IMAGE_WAV								= 0x00000100,
+	VSI_EXPORT_TYPE_PHYSIO						= 0x00000200,
+	VSI_EXPORT_TABLE							= 0x00000800,
+	VSI_COMBINED_REPORT							= 0x00002000,
+	VSI_EXPORT_GRAPH							= 0x00004000,
+	VSI_IMAGE_TIFF_LOOP							= 0x00008000,
+
+	VSI_DICOM_IMPLICIT_VR_LITTLE_ENDIAN			= 0x00010000,
+	VSI_DICOM_EXPLICIT_VR_LITTLE_ENDIAN			= 0x00020000,
+	VSI_DICOM_JPEG_BASELINE						= 0x00040000,
+	VSI_DICOM_RLE_LOSSLESS						= 0x00080000,
+	VSI_DICOM_JPEG_LOSSLESS						= 0x000A0000,
+
+	VSI_IMAGE_IQ_DATA_LOOP						= 0x00100000,
+	VSI_IMAGE_IQ_DATA_FRAME						= 0x00200000,
+	VSI_IMAGE_RF_DATA_LOOP						= 0x00300000,
+	VSI_IMAGE_RF_DATA_FRAME						= 0x00400000,
+	VSI_IMAGE_RAW_DATA_LOOP						= 0x00500000,
+	VSI_IMAGE_RAW_DATA_FRAME					= 0x00600000,
+
+	VSI_DICOM_ENCODE_ECG  					    = 0x01000000,
+	VSI_DICOM_VEVOCQ_EXPORT						= 0x02000000,
+	VSI_DICOM_VEVOSTR_EXPORT					= 0x04000000,
+	VSI_DICOM_UPDATE_ONLY						= 0x08000000,
+	VSI_DICOM_ENCODE_PHYSIO_DATA				= 0x10000000,
+
+	VSI_DICOM_ENCODE_TYPE_MASK				    = 0x000F0000,
+	VSI_DICOM_CONTROL_MASK					    = 0xFF000000,
+	VSI_DICOM_MASK		  					    = VSI_DICOM_ENCODE_TYPE_MASK | VSI_DICOM_CONTROL_MASK,
+
+	VSI_IMAGE_EXPORT_MASK						= 0x00FFFFFF,
+} VSI_EXPORT_TYPE;
+
+typedef enum
+{
+	VSI_EXPORT_DATA_TYPE_HISTOGRAM = 1,
+	VSI_EXPORT_DATA_TYPE_CONTRAST = 2,
+	VSI_EXPORT_DATA_TYPE_CARDIAC = 3,
+	VSI_EXPORT_DATA_TYPE_BLV = 4,
+	VSI_EXPORT_DATA_TYPE_MLV = 5,
+	VSI_EXPORT_DATA_TYPE_PV = 6,
+	VSI_EXPORT_DATA_TYPE_PA = 7,
+} VSI_EXPORT_DATA_TYPE;
+
+[
+	object,
+	uuid(56BEB985-071B-4E61-ABFD-13D9148E17BB),
+	helpstring("IVsiExportImage Interface"),
+	pointer_default(unique)
+]
+interface IVsiExportImage : IUnknown
+{
+	typedef [v1_enum] enum
+	{
+		VSI_EXPORT_IMAGE_FLAG_NONE				= 0x00000000,
+		VSI_EXPORT_IMAGE_FLAG_CINE				= 0x00000001,
+		VSI_EXPORT_IMAGE_FLAG_IMAGE				= 0x00000002,
+		VSI_EXPORT_IMAGE_FLAG_DICOM				= 0x00000004,
+		VSI_EXPORT_IMAGE_FLAG_RAW				= 0x00000008,
+		VSI_EXPORT_IMAGE_FLAG_REPORT			= 0x00000010,
+		VSI_EXPORT_IMAGE_FLAG_TABLE				= 0x00000020,	
+		VSI_EXPORT_IMAGE_FLAG_GRAPH				= 0x00000040,
+		VSI_EXPORT_IMAGE_FLAG_GRAPH_PARAM		= 0x00000080,
+		VSI_EXPORT_IMAGE_FLAG_PHYSIO			= 0x00000100,
+	} VSI_EXPORT_IMAGE_FLAGS;
+
+	HRESULT Initialize([in] DWORD dwFlags);	  // VSI_EXPORT_IMAGE_FLAGS
+	HRESULT AddImage([in] IUnknown *pUnkImage, [in] IUnknown *pUnkMode);
+	HRESULT SetTable([in] HWND hwndTable);
+	HRESULT SetReport([in] IUnknown *pUnkXmlDoc);
+	HRESULT ExportImage([in] IUnknown *pApp, [in] IUnknown *pUnkImage, [in] IUnknown *pUnkMode, [in, string] LPCOLESTR pszPath);
+	HRESULT ExportReport([in] IUnknown *pApp, [in] IUnknown *pUnkXmlDoc, [in, string] LPCOLESTR pszPath);
+	HRESULT SetAnalysisExport([in] IUnknown *pAnalysisExport);
+};
+
+
+[
+	object,
+	uuid(9EFDB9D3-0E0A-4102-9B1A-91959420A2C4),
+	helpstring("IVsiCopyStudyTo Interface"),
+	pointer_default(unique)
+]
+interface IVsiCopyStudyTo : IUnknown
+{
+	HRESULT Initialize([in] const VARIANT *pvParam);
+};
+
+
+[
+	object,
+	uuid(CDF0F051-D3D0-4CD3-B311-CC01DAD3D90A),
+	helpstring("IVsiCopyStudyFrom Interface"),
+	pointer_default(unique)
+]
+interface IVsiCopyStudyFrom : IUnknown
+{
+};
+
+
+[
+	object,
+	uuid(CE2DE21E-B511-4212-B7CF-80733FCC0C0A),
+	helpstring("IVsiStudyMover Interface"),
+	pointer_default(unique)
+]
+interface IVsiStudyMover : IUnknown
+{
+	HRESULT Initialize(
+		[in] HWND hParentWnd,
+		[in] const VARIANT* pvParam,
+		[in] ULONGLONG ullTotalSize,
+		[in] DWORD dwFlags);
+	HRESULT Export(
+		[in, string] LPCOLESTR pszDestPath,
+		[in, string] LPCOLESTR pszCustomFolderName);
+	HRESULT Import([in, string] LPCOLESTR pszDestPath);
+};
+
+[
+	object,
+	uuid(733E709D-D630-4BCC-81A9-102A660078EE),
+	helpstring("IVsiCdDvdWriterView Interface"),
+	pointer_default(unique)
+]
+interface IVsiCdDvdWriterView : IUnknown
+{
+	HRESULT Initialize(
+		[in, string] LPCOLESTR pszDriveLetter,
+		[in] IUnknown *pUnkCdDvdWriter,
+		[in] const VARIANT* pvParam);
+};
+
+[
+	object,
+	uuid(04FB18B1-B900-4C41-A36F-F5075FC76D44),
+	helpstring("IVsiGifAnimateAvi Interface"),
+	pointer_default(unique)
+]
+interface IVsiGifAnimateAvi : IUnknown
+{
+	HRESULT ConvertAviToGif(
+		[in] HWND hwndProgress,
+		[in, string] LPCOLESTR pszInputFileName,
+		[in, string] LPCOLESTR pszOutputFileName);
+	HRESULT ConvertAviToGifDirect(
+		[in] HWND hwndProgress,
+		[in, string] LPCOLESTR pszInputFileName,
+		[in, string] LPCOLESTR pszOutputFileName);
+};
+
+[
+	object,
+	uuid(FFDF6877-5E15-4102-B370-BB1AfE781589),
+	helpstring("IVsiGifAnimateDirect Interface"),
+	pointer_default(unique)
+]
+interface IVsiGifAnimateDirect : IUnknown
+{
+	HRESULT Start(
+		[in] DWORD dwXRes,
+		[in] DWORD dwYRes,
+		[in] DWORD dwRate,
+		[in] DWORD dwScale,
+		[in, string] LPCOLESTR pszOutputFileName);
+	HRESULT AddFrame([in] BYTE *pbtData, [in] DWORD dwSize);
+	HRESULT Stop();
+};
+
+[
+	uuid(935BD427-0075-4F2C-B2D9-2ED885CF4DAC),
+	version(1.0),
+	helpstring("VsiImportExportModule 1.0 Type Library")
+]
+library VsiImportExportModuleLib
+{
+	importlib("stdole2.tlb");
+
+	[
+		uuid(2926FCFD-B3DB-462F-91DB-D74DDEE37671),
+		helpstring("VsiExportImage Class")
+	]
+	coclass VsiExportImage
+	{
+		[default] interface IVsiExportImage;
+	};
+
+	[
+		uuid(FC7C3E32-6D30-4F6D-A3DF-40270CDDFBE5),
+		helpstring("VsiCopyStudyTo Class")
+	]
+	coclass VsiCopyStudyTo
+	{
+		[default] interface IVsiCopyStudyTo;
+	};
+
+	[
+		uuid(E7EC1AFA-480C-4C6F-8958-4767744D2406),
+		helpstring("VsiCopyStudyFrom Class")
+	]
+	coclass VsiCopyStudyFrom
+	{
+		[default] interface IVsiCopyStudyFrom;
+	};
+
+	[
+		uuid(A5ADE391-0D7B-4568-9B11-9CEF42F1B273),
+		helpstring("VsiStudyMover Class")
+	]
+	coclass VsiStudyMover
+	{
+		[default] interface IVsiStudyMover;
+	};
+
+	[
+		uuid(31A90AF5-85A6-4BF7-94C4-D8E1FDECB6C0),
+		helpstring("VsiCdDvdWriterView Class")
+	]
+	coclass VsiCdDvdWriterView
+	{
+		[default] interface IVsiCdDvdWriterView;
+	};
+	[
+		uuid(21036CE6-5955-44C1-9938-9E5842D28349),
+		helpstring("VsiGifAnimate Class")
+	]
+	coclass VsiGifAnimate
+	{
+		[default] interface IVsiGifAnimateAvi;
+		interface IVsiGifAnimateDirect;
+	};
+};

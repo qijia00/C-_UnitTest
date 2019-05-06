@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+  <file name="VsiImportExportModule.dll" hashalg="SHA1">
+    <comClass clsid="{2926FCFD-B3DB-462F-91DB-D74DDEE37671}" tlbid="{935BD427-0075-4F2C-B2D9-2ED885CF4DAC}" description="VsiExportImage Class" threadingModel="Apartment" progid="VsiVevo.ExportImage"></comClass>
+    <comClass clsid="{E7EC1AFA-480C-4C6F-8958-4767744D2406}" tlbid="{935BD427-0075-4F2C-B2D9-2ED885CF4DAC}" description="VsiCopyStudyFrom Class" threadingModel="Apartment" progid="VsiVevo.CopyStudyFrom"></comClass>
+    <comClass clsid="{FC7C3E32-6D30-4F6D-A3DF-40270CDDFBE5}" tlbid="{935BD427-0075-4F2C-B2D9-2ED885CF4DAC}" description="VsiCopyStudyTo Class" threadingModel="Apartment" progid="VsiVevo.CopyStudyTo"></comClass>
+    <comClass clsid="{A5ADE391-0D7B-4568-9B11-9CEF42F1B273}" tlbid="{935BD427-0075-4F2C-B2D9-2ED885CF4DAC}" description="VsiCopyStudyTo Class" threadingModel="Apartment" progid="VsiVevo.StudyMover"></comClass>    
+    <comClass clsid="{31A90AF5-85A6-4BF7-94C4-D8E1FDECB6C0}" tlbid="{935BD427-0075-4F2C-B2D9-2ED885CF4DAC}" description="VsiCdDvdWriterView Class" threadingModel="Apartment" progid="VsiVevo.CdDvdWriterView"></comClass>
+	  <comClass clsid="{21036CE6-5955-44C1-9938-9E5842D28349}" tlbid="{935BD427-0075-4F2C-B2D9-2ED885CF4DAC}" description="VsiGifAnimate Class" threadingModel="Both" progid="VsiVevo.GifAnimate"></comClass>	  
+    <typelib tlbid="{935BD427-0075-4F2C-B2D9-2ED885CF4DAC}" version="1.0" helpdir="" flags="HASDISKIMAGE"></typelib>
+  </file>
+  <file name="VsiImportExportModule.dll">
+    <comClass
+			description="PSFactoryBuffer"
+			clsid="{56BEB985-071B-4E61-ABFD-13D9148E17BB}"
+			threadingModel="Both"
+		/>
+  </file>
+  <comInterfaceExternalProxyStub name="IVsiExportImage" iid="{56BEB985-071B-4E61-ABFD-13D9148E17BB}" tlbid="{935BD427-0075-4F2C-B2D9-2ED885CF4DAC}" proxyStubClsid32="{56BEB985-071B-4E61-ABFD-13D9148E17BB}"></comInterfaceExternalProxyStub>
+  <comInterfaceExternalProxyStub name="IVsiCopyStudyFrom" iid="{CDF0F051-D3D0-4CD3-B311-CC01DAD3D90A}" tlbid="{935BD427-0075-4F2C-B2D9-2ED885CF4DAC}" proxyStubClsid32="{56BEB985-071B-4E61-ABFD-13D9148E17BB}"></comInterfaceExternalProxyStub>
+  <comInterfaceExternalProxyStub name="IVsiCopyStudyTo" iid="{9EFDB9D3-0E0A-4102-9B1A-91959420A2C4}" tlbid="{935BD427-0075-4F2C-B2D9-2ED885CF4DAC}" proxyStubClsid32="{56BEB985-071B-4E61-ABFD-13D9148E17BB}"></comInterfaceExternalProxyStub>
+  <comInterfaceExternalProxyStub name="IVsiStudyMover" iid="{CE2DE21E-B511-4212-B7CF-80733FCC0C0A}" tlbid="{935BD427-0075-4F2C-B2D9-2ED885CF4DAC}" proxyStubClsid32="{56BEB985-071B-4E61-ABFD-13D9148E17BB}"></comInterfaceExternalProxyStub>  
+  <comInterfaceExternalProxyStub name="IVsiCdDvdWriterView" iid="{733E709D-D630-4BCC-81A9-102A660078EE}" tlbid="{935BD427-0075-4F2C-B2D9-2ED885CF4DAC}" proxyStubClsid32="{56BEB985-071B-4E61-ABFD-13D9148E17BB}"></comInterfaceExternalProxyStub>
+  <comInterfaceExternalProxyStub name="IVsiGifAnimateAvi" iid="{04FB18B1-B900-4C41-A36F-F5075FC76D44}" tlbid="{935BD427-0075-4F2C-B2D9-2ED885CF4DAC}" proxyStubClsid32="{56BEB985-071B-4E61-ABFD-13D9148E17BB}"></comInterfaceExternalProxyStub>
+  <comInterfaceExternalProxyStub name="IVsiGifAnimateDirect" iid="{FFDF6877-5E15-4102-B370-BB1AfE781589}" tlbid="{935BD427-0075-4F2C-B2D9-2ED885CF4DAC}" proxyStubClsid32="{56BEB985-071B-4E61-ABFD-13D9148E17BB}"></comInterfaceExternalProxyStub>
+</assembly>

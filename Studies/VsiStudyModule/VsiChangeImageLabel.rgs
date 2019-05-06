@@ -1,0 +1,26 @@
+HKCR
+{
+	VsiVevo.ChangeImageLabel.1 = s 'VsiChangeImageLabel Class'
+	{
+		CLSID = s '{078C1D3A-15DE-4CCC-8D9B-152337CE7BAF}'
+	}
+	VsiVevo.ChangeImageLabel = s 'VsiChangeImageLabel Class'
+	{
+		CLSID = s '{078C1D3A-15DE-4CCC-8D9B-152337CE7BAF}'
+		CurVer = s 'VsiVevo.ChangeImageLabel.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {078C1D3A-15DE-4CCC-8D9B-152337CE7BAF} = s 'VsiChangeImageLabel Class'
+		{
+			ProgID = s 'VsiVevo.ChangeImageLabel.1'
+			VersionIndependentProgID = s 'VsiVevo.ChangeImageLabel'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{624D2124-248F-449C-9AF2-3F5CC258C1D5}'
+		}
+	}
+}
