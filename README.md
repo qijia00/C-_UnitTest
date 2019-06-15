@@ -1,2 +1,2 @@
-# C++_UnitTest
-Sample C++ unit tests scripts I created for developers. Dependencies have been removed for privacy reasons.
+# UnitTest_C++
+Sample C++ unit tests scripts I created for developer team. Dependencies have been removed for privacy reasons.
